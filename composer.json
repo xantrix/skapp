@@ -7,7 +7,7 @@
         "zf2"
     ],
     "minimum-stability": "dev",
-    "homepage": "https://github.com/leogr/ZendSkeletonApp",
+    "homepage": "https://github.com/dmlab/skapp",
     "require": {
         "php": ">=5.4.0",
         "zendframework/zendframework": "dev-master",
@@ -23,9 +23,9 @@
         "twbs/bootstrap": "3.1.*",
         "fortawesome/font-awesome": "4.0.*",
         "ripaclub/zf2-hanger-snippet": "dev-master",
-        "leogr/zf2-auth-module" : "dev-develop",
-        "leogr/zf2-facebook-module" : "dev-develop",
-        "ripaclub/zf2-matryoshka-module" : "dev-develop"
+        "leogr/zf2-auth-module": "dev-develop",
+        "leogr/zf2-facebook-module": "dev-develop",
+        "ripaclub/zf2-matryoshka-module": "dev-develop"
 
     },
     "repositories": [
@@ -41,7 +41,7 @@
             "type": "vcs",
             "url": "https://github.com/ripaclub/matryoshka.git"
         },
-    	{
+        {
             "type": "vcs",
             "url": "https://github.com/ripaclub/matryoshka-wrappers.git"
         },
@@ -58,15 +58,14 @@
             "package": {
                 "name": "cssmin/cssmin",
                 "version": "3.0.1",
-                "dist": { "url": "http://cssmin.googlecode.com/files/cssmin-v3.0.1.php", "type": "file" },
-                "autoload": { "classmap": [ "cssmin-v3.0.1.php" ] }
+                "dist": {
+                    "url": "http://cssmin.googlecode.com/files/cssmin-v3.0.1.php",
+                    "type": "file"
+                },
+                "autoload": {
+                    "classmap": [ "cssmin-v3.0.1.php" ]
+                }
             }
         }
-    ],
-    "scripts": {
-        "post-install-cmd": [
-            "chmod -R 666 public/_/assets",
-            "chmod -R 666 data"
-        ]
-    }
+    ]
 }
