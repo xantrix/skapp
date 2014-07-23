@@ -44,17 +44,17 @@ class Module
 
     public function getServiceConfig()
     {
-         return array(
-            'aliases' => array(
+         return [
+            'aliases' => [
                 'Zend\Session\SaveHandler\SaveHandlerInterface' => 'Zend\Session\SaveHandler\MongoDB',
                 'Zend\Session\Storage\StorageInterface' => 'Zend\Session\Storage\SessionArrayStorage',
-            ),
+            ],
 
-            'invokables' => array(
+            'invokables' => [
                 'Zend\Session\Storage\SessionArrayStorage' => 'Zend\Session\Storage\SessionArrayStorage',
-            ),
+            ],
 
-            'factories' => array(
+            'factories' => [
 
                 'Zend\Session\Config\ConfigInterface' => 'Zend\Session\Service\SessionConfigFactory',
                 'Zend\Session\SessionManager' => 'Zend\Session\Service\SessionManagerFactory',
@@ -73,22 +73,21 @@ class Module
 
                         unset($config['username'], $config['password']);
 
-                        $options = array_key_exists('options', $config) &&
-                        is_array($config['options']) ?
+                        $options = array_key_exists('options', $config) && is_array($config['options']) ?
                             $config['options'] :
-                            array();
+                            [];
 
                         unset($config['options']);
 
                         $client = new \MongoClient("mongodb://{$credential}{$hosts}", $options);
                         $saveHandlerConfig = new MongoDBOptions($config);
-                        $saveHandlerConfig->setSaveOptions(array('w' => true));
+                        $saveHandlerConfig->setSaveOptions(['w' => 1]);
                         $sessionHandler = new \Zend\Session\SaveHandler\MongoDB($client, $saveHandlerConfig);
 
                         return $sessionHandler;
                     },
-            ),
-        );
+            ],
+        ];
     }
 
     public function getConfig()
@@ -98,12 +97,12 @@ class Module
 
     public function getAutoloaderConfig()
     {
-        return array(
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+        return [
+            'Zend\Loader\StandardAutoloader' => [
+                'namespaces' => [
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                ),
-            ),
-        );
+                ],
+            ],
+        ];
     }
 }

@@ -7,194 +7,145 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-return array(
-    'router'                => array(
-        'routes' => array(
-            'home'        => array(
-                'type'    => 'Zend\Mvc\Router\Http\Literal',
-                'options' => array(
-                    'route'    => '/',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action'     => 'index',
-                    ),
-                ),
-            ),
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
-            'application' => array(
-                'type'          => 'Literal',
-                'options'       => array(
-                    'route'    => '/application',
-                    'defaults' => array(
-                        '__NAMESPACE__' => 'Application\Controller',
-                        'controller'    => 'Index',
-                        'action'        => 'index',
-                    ),
-                ),
-                'may_terminate' => false,
-                'child_routes'  => array(
-                    'default' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'       => '/[:controller[/:action]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults'    => array(),
-                        ),
-                    ),
-                ),
-            ),
-        ),
-    ),
-    'service_manager'       => array(
-        'abstract_factories' => array(
+$config = [
+    'service_manager'       => [
+        'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
-        ),
-        'factories' => array(
+        ],
+        'factories' => [
             'Zend\Session\SessionManager' => 'Zend\Session\Service\SessionManagerFactory',
             'SphinxSearch\Db\Adapter\Adapter' => 'SphinxSearch\Db\Adapter\AdapterServiceFactory',
-        ),
-        'aliases'            => array(
+        ],
+        'aliases'            => [
             'translator' => 'MvcTranslator',
             'sphinxql' => 'SphinxSearch\Db\Adapter\Adapter',
-        ),
-    ),
-    'translator'            => array(
+        ],
+    ],
+    'translator'            => [
         'locale'                    => 'en_US',
-        'translation_file_patterns' => array(
-            array(
+        'translation_file_patterns' => [
+            [
                 'type'     => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
-            ),
-        ),
-    ),
-    'controllers'           => array(
-        'invokables' => array(
+            ],
+        ],
+    ],
+    'controllers'           => [
+        'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController'
-        ),
-    ),
-    'view_manager'          => array(
+        ],
+    ],
+    'view_manager'          => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
-        'template_map'             => array(
+        'template_map'             => [
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
-        ),
-        'template_path_stack'      => array(
+        ],
+        'template_path_stack'      => [
             __DIR__ . '/../view',
-        ),
-        'strategies' => array(
+        ],
+        'strategies' => [
             'ViewJsonStrategy',
-        ),
-    ),
+        ],
+    ],
 
-    'assetic_configuration' => array(
+    'assetic_configuration' => [
         'webPath'        => 'public/_/assets',
         'basePath'       => '/_/assets',
-        'default'         => array(
-            'assets' => array(
+        'default'         => [
+            'assets' => [
                 '@application_css',
                 '@application_js'
-            ),
-        ),
+            ],
+        ],
 
-        'modules'        => array(
-            'application' => array(
+        'modules'        => [
+            'application' => [
                 'root_path'   => __DIR__ . '/../assets',
-                'collections' => array(
-                    'application_less' => array(
-                        'assets'  => array(
+                'collections' => [
+                    'application_less' => [
+                        'assets'  => [
                             'less/style.less'
-                        ),
-                        'filters' => array(
-                            'LessphpFilter' => array(
+                        ],
+                        'filters' => [
+                            'LessphpFilter' => [
                                 'name' => 'Assetic\Filter\LessphpFilter'
-                            ),
+                            ],
 
-                        ),
-                    ),
-                    'application_fonts' => array(
-                        'assets' => array(
+                        ],
+                    ],
+                    'application_fonts' => [
+                        'assets' => [
                             __DIR__ . '/../../../vendor/fortawesome/font-awesome/fonts/*'
-                        ),
-                        'options' => array(
+                        ],
+                        'options' => [
                             'move_raw' => true,
-                        )
-                    ),
-                    'application_compatibility' => array(
-                        'assets' => array(
+                        ],
+                    ],
+                    'application_compatibility' => [
+                        'assets' => [
                             __DIR__ . '/../../../vendor/afarkas/html5shiv/dist/*',
                             __DIR__ . '/../../../vendor/rogeriopradoj/respond/dest/*',
-                        ),
-                        'options' => array(
+                        ],
+                        'options' => [
                             'move_raw' => true
-                        )
-                    ),
-                    'application_css'  => array(
-                        'assets'  => array(
+                        ],
+                    ],
+                    'application_css'  => [
+                        'assets'  => [
                             '@application_less'
-                        ),
-                        'filters' => array(
-                            'CssRewriteFilter' => array(
+                        ],
+                        'filters' => [
+                            'CssRewriteFilter' => [
                                 'name' => 'Assetic\Filter\CssRewriteFilter'
-                            ),
-                            '?CssMinFilter' => array(
+                            ],
+                            '?CssMinFilter' => [
                                 'name' => 'Assetic\Filter\CssMinFilter'
-                            )
-
-
-                        ),
-                        'options' => array(
+                            ],
+                        ],
+                        'options' => [
                             'output' => 'application.css'
-                        )
-                    ),
-                    'application_js'          => array(
-                        'assets' => array(
+                        ],
+                    ],
+                    'application_js'          => [
+                        'assets' => [
                             __DIR__ . '/../../../vendor/components/jquery/jquery.js',
                             __DIR__ . '/../../../vendor/twbs/bootstrap/dist/js/bootstrap.js',
-                        ),
-                        'filters' => array(
-                            '?JSMinFilter' => array(
+                        ],
+                        'filters' => [
+                            '?JSMinFilter' => [
                                 'name' => 'Assetic\Filter\JSMinFilter'
-                            )
-                        )
-                    ),
-                ),
-            ),
-        ),
-    ),
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
 
-    'hanger_snippet' => array(
-        'snippets' => array(
-            'google-analytics' => array(
+    'hanger_snippet' => [
+        'snippets' => [
+            'google-analytics' => [
                 'config_key' => 'ga', //the config node in the global config, if any
-            ),
-            'facebook-sdk' => array(
+            ],
+            'facebook-sdk' => [
                 'config_key' => 'facebook', //the config node in the global config, if any
-                'values' => array(
+                'values' => [
                     'status' => true,
                     'xfbml'  => false,
-                ),
-            )
-        ),
-    ),
+                ],
+            ],
+        ],
+    ],
+];
 
-    // Placeholder for console routes
-    'console'               => array(
-        'router' => array(
-            'routes' => array(),
-        ),
-    ),
-);
+$config = Zend\Stdlib\ArrayUtils::merge($config, include __DIR__ . '/route.config.php');
+return $config;

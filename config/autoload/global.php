@@ -11,28 +11,28 @@
  * file.
  */
 
-return array(
-    'application' => array(
+return [
+    'application' => [
         'base_url'  => '/'
-    ),
-    'assetic_configuration' => array(
+    ],
+    'assetic_configuration' => [
         'debug'          => true,
         'buildOnRequest' => true,
-    ),
-    'sphinxql' => array(
+    ],
+    'sphinxql' => [
         'driver'    => 'pdo_mysql',
         'hostname'  => '127.0.0.1',
         'port'      => 9306,
         'charset'   => 'UTF8'
-    ),
-    'ga' => array(
+    ],
+    'ga' => [
         'monitoring_id' => 'UA-XXXXXXXX-X',
         'domain'        => 'yourdomain.com'
-    ),
-    'facebook' => array(
+    ],
+    'facebook' => [
         'appId' => '',
-    ),
-    'session_config' => array(
+    ],
+    'session_config' => [
         'name'                  => 'PHPSID',
         'use_cookies'           => true,
         'cookie_domain'         => 'yourdomain.com',
@@ -40,13 +40,13 @@ return array(
         'cookie_lifetime'       => 2592000, //30 days
         'remember_me_seconds'   => 2592000, //30 days
         'gc_maxlifetime'        => 2592000, //30 days
-    ),
-    'session_manager' => array(
+    ],
+    'session_manager' => [
         'enable_default_container_manager' => true,
-    ),
-    'session_save_handler_mongo' => array(
+    ],
+    'session_save_handler_mongo' => [
         'hosts'      => '127.0.0.1:27017',
         'database'   => 'yourdatabase',
         'collection' => 'sessions',
-    ),
-);
+    ],
+];
