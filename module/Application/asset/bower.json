@@ -1,0 +1,24 @@
+{
+  "name": "Application",
+  "version": "0.0.1",
+  "authors": [
+    "Lorenzo Fontana <fontanalorenzo@me.com>",
+    "Leonardo Grasso <me@leonardograsso.com>",
+    "Leonardo Di Donato <leodionato@gmail.com>",
+    "Antonino Visalli <antonino.visalli@gmail.com>"
+  ],
+  "description": "Application Module",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.20",
+    "angular-ui": "~0.4.0",
+    "bootstrap": "~3.2.0"
+  }
+}
