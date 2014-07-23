@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-$config = [
+return [
     'service_manager'       => [
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -146,6 +146,3 @@ $config = [
         ],
     ],
 ];
-
-$config = Zend\Stdlib\ArrayUtils::merge($config, include __DIR__ . '/route.config.php');
-return $config;

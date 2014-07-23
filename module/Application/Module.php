@@ -14,6 +14,7 @@ use Zend\Mvc\MvcEvent;
 use Zend\Session\Container;
 use Zend\Console\Console;
 use Zend\Session\SaveHandler\MongoDBOptions;
+use Zend\Stdlib\ArrayUtils;
 
 class Module
 {
@@ -92,7 +93,9 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/config/module.config.php';
+        $config = include __DIR__ . '/config/module.config.php';
+        $config = ArrayUtils::merge($config, include __DIR__ . '/config/route.config.php');
+        return $config;
     }
 
     public function getAutoloaderConfig()
