@@ -15,8 +15,9 @@ use Zend\Session\Container;
 use Zend\Console\Console;
 use Zend\Session\SaveHandler\MongoDBOptions;
 use Zend\Stdlib\ArrayUtils;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 
-class Module
+class Module implements ViewHelperProviderInterface
 {
     public function onBootstrap(MvcEvent $e)
     {
@@ -96,6 +97,11 @@ class Module
         $config = include __DIR__ . '/config/module.config.php';
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/route.config.php');
         return $config;
+    }
+
+    public function getViewHelperConfig()
+    {
+        return include __DIR__ . '/config/viewhelper.config.php';
     }
 
     public function getAutoloaderConfig()
