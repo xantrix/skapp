@@ -12,6 +12,9 @@
  */
 
 return array(
+    'application' => array(
+        'base_url'  => '/'
+    ),
     'assetic_configuration' => array(
         'debug'          => true,
         'buildOnRequest' => true,

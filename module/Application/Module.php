@@ -17,13 +17,15 @@ use Zend\Session\SaveHandler\MongoDBOptions;
 
 class Module
 {
-public function onBootstrap(MvcEvent $e)
+    public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $serviceManager      = $e->getApplication()->getServiceManager();
+        $config              = $serviceManager->get('Config');
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
         if (!Console::isConsole()) {
+            $e->getRequest()->setBaseUrl($config['application']['base_url']);
             $this->bootstrapSession($e);
         }
     }
