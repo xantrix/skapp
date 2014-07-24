@@ -60,13 +60,8 @@ return [
     'assetic_configuration' => [
         'webPath'        => 'public/_/asset/application',
         'basePath'       => '/_/asset/application',
-        'default'         => [
-            'assets' => [
-                '@application',
-            ],
-        ],
         'modules'        => [
-            'application' => [
+            'application_asset' => [
                 'root_path'   => __DIR__ . '/../asset/dist/application',
                 'collections' => [
                     'application' => [
