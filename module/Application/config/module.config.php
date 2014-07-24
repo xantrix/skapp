@@ -8,13 +8,6 @@
  */
 
 return [
-    'asset_manager' => [
-        'resolver_configs' => [
-            'paths' => [
-                __DIR__ . '/../asset/dist',
-            ],
-        ],
-    ],
     'service_manager'       => [
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
@@ -65,72 +58,25 @@ return [
     ],
 
     'assetic_configuration' => [
-        'webPath'        => 'public/_/assets',
-        'basePath'       => '/_/assets',
+        'webPath'        => 'public/_/asset/application',
+        'basePath'       => '/_/asset/application',
         'default'         => [
             'assets' => [
-                '@application_css',
-                '@application_js'
+                '@application',
             ],
         ],
-
         'modules'        => [
             'application' => [
-                'root_path'   => __DIR__ . '/../assets',
+                'root_path'   => __DIR__ . '/../asset/dist/application',
                 'collections' => [
-                    'application_less' => [
-                        'assets'  => [
-                            'less/style.less'
-                        ],
-                        'filters' => [
-                            'LessphpFilter' => [
-                                'name' => 'Assetic\Filter\LessphpFilter'
-                            ],
-
-                        ],
-                    ],
-                    'application_fonts' => [
+                    'application' => [
                         'assets' => [
-                            __DIR__ . '/../../../vendor/fortawesome/font-awesome/fonts/*'
-                        ],
-                        'options' => [
-                            'move_raw' => true,
-                        ],
-                    ],
-                    'application_compatibility' => [
-                        'assets' => [
-                            __DIR__ . '/../../../vendor/afarkas/html5shiv/dist/*',
-                            __DIR__ . '/../../../vendor/rogeriopradoj/respond/dest/*',
+                            'css/application.css',
+                            'js/application.js',
+                            'fonts/*'
                         ],
                         'options' => [
                             'move_raw' => true
-                        ],
-                    ],
-                    'application_css'  => [
-                        'assets'  => [
-                            '@application_less'
-                        ],
-                        'filters' => [
-                            'CssRewriteFilter' => [
-                                'name' => 'Assetic\Filter\CssRewriteFilter'
-                            ],
-                            '?CssMinFilter' => [
-                                'name' => 'Assetic\Filter\CssMinFilter'
-                            ],
-                        ],
-                        'options' => [
-                            'output' => 'application.css'
-                        ],
-                    ],
-                    'application_js'          => [
-                        'assets' => [
-                            __DIR__ . '/../../../vendor/components/jquery/jquery.js',
-                            __DIR__ . '/../../../vendor/twbs/bootstrap/dist/js/bootstrap.js',
-                        ],
-                        'filters' => [
-                            '?JSMinFilter' => [
-                                'name' => 'Assetic\Filter\JSMinFilter'
-                            ],
                         ],
                     ],
                 ],
