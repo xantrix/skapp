@@ -15,8 +15,8 @@
         "ripaclub/zf2-hanger-snippet": "dev-master",
         "leogr/zf2-auth-module": "dev-develop",
         "leogr/zf2-facebook-module": "dev-develop",
-        "ripaclub/zf2-matryoshka-module": "dev-develop"
-
+        "ripaclub/zf2-matryoshka-module": "dev-develop",
+        "rwoverdijk/assetmanager": "~1.3"
     },
     "repositories": [
         {

@@ -8,6 +8,13 @@
  */
 
 return [
+    'asset_manager' => [
+        'resolver_configs' => [
+            'paths' => [
+                __DIR__ . '/../asset/dist',
+            ],
+        ],
+    ],
     'service_manager'       => [
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',

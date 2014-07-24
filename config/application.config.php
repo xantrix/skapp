@@ -2,7 +2,7 @@
 return [
     // This should be an array of module namespaces used in the application.
     'modules' => [
-        'AsseticBundle',
+        'AssetManager',
         'HangerSnippet',
         'Matryoshka',
         'SphinxSearch',
