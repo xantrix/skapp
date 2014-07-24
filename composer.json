@@ -11,22 +11,12 @@
     "require": {
         "php": ">=5.4.0",
         "zendframework/zendframework": "dev-master",
-        "widmogrod/zf2-assetic-module": "1.3.*",
-        "oyejorge/less.php": "~1.5",
-        "cssmin/cssmin": "*",
-        "mrclay/minify": "2.2.*",
         "ripaclub/zf2-sphinxsearch": ">=0.6",
-        "robloach/component-installer": "*",
-        "components/jquery": "1.11.*",
-        "rogeriopradoj/respond": "*",
-        "afarkas/html5shiv": "*",
-        "twbs/bootstrap": "3.1.*",
-        "fortawesome/font-awesome": "4.0.*",
         "ripaclub/zf2-hanger-snippet": "dev-master",
         "leogr/zf2-auth-module": "dev-develop",
         "leogr/zf2-facebook-module": "dev-develop",
-        "ripaclub/zf2-matryoshka-module": "dev-develop"
-
+        "ripaclub/zf2-matryoshka-module": "dev-develop",
+        "widmogrod/zf2-assetic-module": "1.3.*"
     },
     "repositories": [
         {
@@ -52,20 +42,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/ripaclub/zf2-hanger-snippet.git"
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "cssmin/cssmin",
-                "version": "3.0.1",
-                "dist": {
-                    "url": "http://cssmin.googlecode.com/files/cssmin-v3.0.1.php",
-                    "type": "file"
-                },
-                "autoload": {
-                    "classmap": [ "cssmin-v3.0.1.php" ]
-                }
-            }
         }
     ]
 }
