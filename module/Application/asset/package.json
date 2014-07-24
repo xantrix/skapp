@@ -10,22 +10,23 @@
         "url": "https://github.com/dmlab/application.git"
     },
     "authors": [
-    {
-        "name": "Lorenzo Fontana",
-        "email": "fontanalorenzo@me.com"
-    },
-    {
-        "name": "Leonardo Grasso",
-        "email": "me@leonardograsso.com"
-    },
-    {
-        "name": "Leonardo Di Donato",
-        "email": "leodidonato@gmail.com"
-    },
-    {
-        "name": "Antonino Visalli",
-        "email": "antonino.visalli@gmail.com"
-    },
+        {
+            "name": "Lorenzo Fontana",
+            "email": "fontanalorenzo@me.com"
+        },
+        {
+            "name": "Leonardo Grasso",
+            "email": "me@leonardograsso.com"
+        },
+        {
+            "name": "Leonardo Di Donato",
+            "email": "leodidonato@gmail.com"
+        },
+        {
+            "name": "Antonino Visalli",
+            "email": "antonino.visalli@gmail.com"
+        }
+    ],
     "dependencies": {
         "bower": "^1.3.7",
         "grunt": "^0.4.5",
