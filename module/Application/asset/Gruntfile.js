@@ -80,7 +80,22 @@ module.exports = function (grunt) {
                             src: ['*.map'],
                             dest: '<%= config.dist %>/js/',
                             filter: 'isFile'
+                        },
+                        {
+                            expand: true,
+                            cwd: '<%= config.app %>/vendor/html5shiv/dist',
+                            src: ['html5shiv.min.js'],
+                            dest: '<%= config.dist %>/js/',
+                            filter: 'isFile'
+                        },
+                        {
+                            expand: true,
+                            cwd: '<%= config.app %>/vendor/respond/dest',
+                            src: ['respond.min.js'],
+                            dest: '<%= config.dist %>/js/',
+                            filter: 'isFile'
                         }
+
                     ]
                 },
                 fonts: {
