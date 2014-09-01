@@ -25,8 +25,6 @@ and use `composer` to install dependencies:
     composer install
 
 
-
-
 ### PHP CLI Server
 
 The simplest way to get started if you are using PHP 5.4 or above is to start the internal PHP cli-server in the root directory:
@@ -85,3 +83,13 @@ server {
 **Note**: This nginx config requires that you have the eot,ttf and woff mime types in yout mime.types
 
 Restart the nginx, now you should be ready to go!
+
+### Application Setup
+
+install npm
+
+go to module/Application/asset and run
+
+    npm install
+    bower install
+    grunt default

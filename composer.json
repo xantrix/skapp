@@ -15,8 +15,9 @@
         "ripaclub/zf2-hanger-snippet": "dev-master",
         "leogr/zf2-auth-module": "dev-develop",
         "leogr/zf2-facebook-module": "dev-develop",
-        "ripaclub/zf2-matryoshka-module": "dev-develop",
-        "widmogrod/zf2-assetic-module": "1.3.*"
+        "widmogrod/zf2-assetic-module": "1.3.*",
+        "matryoshka-model/zf2-matryoshka-module": "dev-master",
+        "matryoshka-model/mongo-wrapper": "dev-develop"
     },
     "repositories": [
         {
@@ -29,19 +30,17 @@
         },
         {
             "type": "vcs",
-            "url": "https://github.com/ripaclub/matryoshka.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ripaclub/matryoshka-wrappers.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/ripaclub/zf2-matryoshka-module.git"
+            "url": "https://github.com/matryoshka-model/mongo-wrapper.git"
         },
         {
             "type": "vcs",
             "url": "https://github.com/ripaclub/zf2-hanger-snippet.git"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "sudo chmod -R 777 public/_/asset",
+            "sudo chmod -R 666 data"
+        ]
+    }
 }
