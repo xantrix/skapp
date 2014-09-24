@@ -31,9 +31,6 @@ return [
         'monitoring_id' => 'UA-XXXXXXXX-X',
         'domain'        => 'yourdomain.com'
     ],
-    'facebook' => [
-        'appId' => '',
-    ],
     'session_config' => [
         'name'                  => 'PHPSID',
         'use_cookies'           => true,
