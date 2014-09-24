@@ -80,16 +80,21 @@ server {
         }
 }
 ```
-**Note**: This nginx config requires that you have the eot,ttf and woff mime types in yout mime.types
+**Note**: This nginx config requires that you have the eot, ttf and woff mime types in your mime.types
 
 Restart the nginx, now you should be ready to go!
 
-### Application Setup
+### Application setup
 
-install npm
+1. Install nodejs
 
-go to module/Application/asset and run
+2. `npm install -g bower`
 
-    npm install
-    bower install
-    grunt default
+3. `npm install -g grunt-cli`
+
+4. `cd module/Application/asset` and execute:
+
+    `npm install`
+    `bower install`
+    `grunt default`
+
