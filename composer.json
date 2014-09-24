@@ -21,7 +21,7 @@
     "scripts": {
         "post-install-cmd": [
             "sudo chmod -R 777 public/_/asset",
-            "sudo chmod -R 666 data"
+            "sudo chmod 666 data"
         ]
     }
 }
