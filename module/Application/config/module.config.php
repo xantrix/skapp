@@ -58,17 +58,15 @@ return [
     ],
 
     'assetic_configuration' => [
-        'webPath'        => 'public/_/asset/application',
-        'basePath'       => '/_/asset/application',
         'modules'        => [
             'application_asset' => [
-                'root_path'   => __DIR__ . '/../asset/dist/application',
+                'root_path'   => __DIR__ . '/../asset/dist',
                 'collections' => [
                     'application' => [
                         'assets' => [
-                            'css/application.css',
-                            'js/application.js',
-                            'fonts/*'
+                            'application/css/*',
+                            'application/js/*',
+                            'application/fonts/*'
                         ],
                         'options' => [
                             'move_raw' => true

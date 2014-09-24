@@ -1,5 +1,4 @@
 <?php echo $this->doctype(); ?>
-
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -12,13 +11,14 @@
 
         <!-- Le styles -->
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' =>  '/img/favicon.ico')); ?>
-        <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/_/asset/application/css/application.css'); ?>
+        <?php echo $this->headLink()->prependStylesheet($this->basePath('/_/asset/application/css/application.css')); ?>
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE9]>
-        <script src="/application/js/html5shiv.min.js"></script>
-        <script src="/application/js/respond.min.js"></script>
+        <script src="<?=$this->basePath('/_/asset/application/js/html5shiv.min.js')?>"></script>
+        <script src="<?=$this->basePath('/_/asset/application/js/respond.min.js')?>"></script>
         <![endif]-->
+        <?php echo $this->headScript();?>
 
     </head>
     <body>
@@ -47,6 +47,6 @@
             </footer>
         </div> <!-- /container -->
         <?php echo $this->hangerSnippet() ?>
-        <?php echo $this->inlineScript()->prependFile('/_/asset/application/js/application.js'); ?>
+        <?php echo $this->inlineScript()->prependFile($this->basePath('/_/asset/application/js/application.js')); ?>
     </body>
 </html>

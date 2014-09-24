@@ -18,6 +18,8 @@ return [
     'assetic_configuration' => [
         'debug'          => true,
         'buildOnRequest' => true,
+        'webPath'        => 'public/_/asset',
+        'basePath'       => '/_/asset',
     ],
     'sphinxql' => [
         'driver'    => 'pdo_mysql',
