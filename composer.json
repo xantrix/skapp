@@ -4,31 +4,20 @@
     "license": "BSD-3-Clause",
     "keywords": [
         "framework",
-        "zf2"
+        "zf2",
+        "webapp"
     ],
-    "minimum-stability": "dev",
     "homepage": "https://github.com/dmlab/skapp",
     "require": {
         "php": ">=5.4.0",
-        "zendframework/zendframework": "dev-master",
+        "zendframework/zendframework": "~2.3",
         "ripaclub/zf2-sphinxsearch": ">=0.6",
-        "ripaclub/zf2-hanger-snippet": "dev-master",
-        "leogr/zf2-auth-module": "dev-develop",
-        "leogr/zf2-facebook-module": "dev-develop",
+        "ripaclub/zf2-hanger-snippet": "1.*",
+        "leogr/zf2-auth-module": "~0.1",
         "widmogrod/zf2-assetic-module": "1.3.*",
-        "matryoshka-model/zf2-matryoshka-module": "~0.3",
-        "matryoshka-model/mongo-wrapper": "~0.3"
+        "matryoshka-model/zf2-matryoshka-module": "~0.4",
+        "matryoshka-model/mongo-wrapper": "~0.4"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/leogr/zf2-auth-module.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leogr/zf2-facebook-module.git"
-        }
-    ],
     "scripts": {
         "post-install-cmd": [
             "sudo chmod -R 777 public/_/asset",
