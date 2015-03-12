@@ -98,3 +98,22 @@ Restart the nginx, now you should be ready to go!
     `bower install`
     `grunt default`
 
+**Note:** use `grunt watch` to keep js/less files synced in dist directory
+
+To enable development mode
+--------------------------
+
+```sh
+cd path/to/install
+php public/index.php development enable
+```
+
+To disable development mode
+---------------------------
+
+```sh
+cd path/to/install
+php public/index.php development disable
+```
+
+**Note:** Don't run development mode on your production server.
