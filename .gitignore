@@ -8,5 +8,7 @@ nbproject
 .settings
 composer.lock
 composer.phar
+development.config.php
 vendor
 components
+
