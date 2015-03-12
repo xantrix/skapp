@@ -16,7 +16,8 @@
         "leogr/zf2-auth-module": "~0.1",
         "widmogrod/zf2-assetic-module": "1.3.*",
         "matryoshka-model/zf2-matryoshka-module": "~0.4",
-        "matryoshka-model/mongo-wrapper": "~0.4"
+        "matryoshka-model/mongo-wrapper": "~0.4",
+	"matryoshka-model/rest-wrapper": "0.6.*"
     },
     "scripts": {
         "post-install-cmd": [
