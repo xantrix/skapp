@@ -78,6 +78,7 @@ return [
     ],
 
     'hanger_snippet' => [
+    	'enable_all' => false,
         'snippets' => [
             'google-analytics' => [
                 'config_key' => 'ga', //the config node in the global config, if any
