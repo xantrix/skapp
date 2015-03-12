@@ -12,14 +12,27 @@ return [
         'abstract_factories' => [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
+            'Matryoshka\Model\Wrapper\Mongo\Service\MongoDbAbstractServiceFactory',
+            'Matryoshka\Model\Wrapper\Mongo\Service\MongoCollectionAbstractServiceFactory',
         ],
         'factories' => [
             'Zend\Session\SessionManager' => 'Zend\Session\Service\SessionManagerFactory',
             'SphinxSearch\Db\Adapter\Adapter' => 'SphinxSearch\Db\Adapter\AdapterServiceFactory',
         ],
+        'invokables'         => [
+            // Default ResultSet
+            'Matryoshka\Model\Wrapper\Mongo\ResultSet\HydratingResultSet' => 'Matryoshka\Model\Wrapper\Mongo\ResultSet\HydratingResultSet',
+
+            // Default criterias
+            'Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria' => 'Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria',
+            'Matryoshka\Model\Wrapper\Mongo\Criteria\FindAllCriteria' => 'Matryoshka\Model\Wrapper\Mongo\Criteria\FindAllCriteria',
+        ],
         'aliases'            => [
             'translator' => 'MvcTranslator',
             'sphinxql' => 'SphinxSearch\Db\Adapter\Adapter',
+        ],
+        'shared' => [
+            'Matryoshka\Model\Wrapper\Mongo\ResultSet\HydratingResultSet'                           => false,
         ],
     ],
     'translator'            => [

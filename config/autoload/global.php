@@ -48,4 +48,11 @@ return [
         'database'   => 'yourdatabase',
         'collection' => 'sessions',
     ],
+    // Mongo Connection for matryoshka
+    'mongodb' => [
+        'DataBase\MongoDb' => [
+            'hosts' => '127.0.0.1:27017',
+            'database' => 'skapp'
+        ],
+    ],
 ];
