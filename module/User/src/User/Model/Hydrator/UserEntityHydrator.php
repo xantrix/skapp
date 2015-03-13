@@ -3,6 +3,8 @@ namespace User\Model\Hydrator;
 
 use Matryoshka\Model\Hydrator\ClassMethods;
 use Matryoshka\Model\Hydrator\Strategy\DateTimeStrategy;
+use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 
 /**
  * Class UserEntityHydrator

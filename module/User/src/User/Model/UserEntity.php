@@ -10,6 +10,16 @@ class UserEntity extends AbstractEntity implements UserInterface
     use DateAwareTrait;
 
     /**
+     * @var string
+     */
+    protected $id;
+    
+    /**
+     * @var string
+     */
+     protected $status;
+    
+    /**
      * Runtime only, must not saved
      * @var string
      */
@@ -51,6 +61,34 @@ class UserEntity extends AbstractEntity implements UserInterface
     protected $language;
 
     /**
+	 * @return the $status
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
+
+	/**
+	 * @param string $status
+	 */
+	public function setStatus($status) {
+		$this->status = $status;
+	}
+
+	/**
+	 * @return the $id
+	 */
+	public function getId() {
+		return $this->id;
+	}
+
+	/**
+	 * @param string $id
+	 */
+	public function setId($id) {
+		$this->id = $id;
+	}
+
+	/**
      * @param string $email
      * @return $this
      */

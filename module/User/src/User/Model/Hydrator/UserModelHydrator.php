@@ -3,6 +3,7 @@ namespace User\Model\Hydrator;
 
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
+use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoDateStrategy;
 /**
  * Class UserModelHydrator

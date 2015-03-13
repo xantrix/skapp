@@ -1,1 +1,14 @@
-Action "index", controller "User", module "User".
+<?php /* @var $user \User\Model\UserEntity */ ?>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Users</h1>
+    </div>
+    <div class="col-xs-12">
+        <ul class="fa-ul">
+        <?php foreach ($this->users as $user) :?>
+          <li><i class="fa-li fa fa-square"></i><?= $user->getId()?> - <?= $user->getEmail()?> - <?= $user->getDateCreated()->format(DateTime::ISO8601)?></li>
+        <?php endforeach;?>
+        </ul>
+    </div>
+</div>
