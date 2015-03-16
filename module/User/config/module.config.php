@@ -1,5 +1,13 @@
 <?php
 return [
+    'authentication' => [
+        'adapter'   => 'User\Authentication\AuthModelAdapter',
+    ],
+    'service_manager'   => [
+        'factories' => [
+            'User\Authentication\AuthModelAdapter' => 'User\Authentication\AuthModelAdapterFactory',
+        ],
+    ],
     'controllers'           => [
         'invokables' => [
             'User\Controller\User' => 'User\Controller\UserController'

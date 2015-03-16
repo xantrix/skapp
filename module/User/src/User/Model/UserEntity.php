@@ -4,8 +4,9 @@ namespace User\Model;
 use Application\Model\AbstractEntity;
 use Zend\Crypt\Password\Bcrypt;
 use Application\Model\DateAwareTrait;
+use AuthModule\Identity\ObjectInterface as AuthObjectInterface;
 
-class UserEntity extends AbstractEntity implements UserInterface
+class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInterface
 {
     use DateAwareTrait;
 
@@ -13,12 +14,12 @@ class UserEntity extends AbstractEntity implements UserInterface
      * @var string
      */
     protected $id;
-    
+
     /**
      * @var string
      */
      protected $status;
-    
+
     /**
      * Runtime only, must not saved
      * @var string
@@ -238,5 +239,16 @@ class UserEntity extends AbstractEntity implements UserInterface
     {
         $this->language = $language;
         return $this;
+    }
+
+    /**
+     * @param string $credential
+     * @return boolean
+     */
+    public function validateCredential($credential)
+    {
+        $bCrypt = new Bcrypt();
+        $bCrypt->setCost(UserInterface::BCRYPT_COST);
+        return $bCrypt->verify($credential, $this->passwordCrypt);
     }
 }
