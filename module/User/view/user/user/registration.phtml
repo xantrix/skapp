@@ -1,0 +1,127 @@
+<?php
+use User\Form\FieldSet\UserFieldSet;
+use User\Form\RegistrationForm;
+
+//$this->layout('layout/layout-minimal');
+
+$registrationForm = $this->registrationForm;
+$registrationForm->setAttribute('action', $this->url('registration'));
+$registrationForm->setAttribute('autocomplete', 'off');
+$registrationForm->prepare();
+$fieldSetRegistration = $registrationForm->get(\User\Form\FieldSet\UserFieldSet::NAME);
+
+$openTemplateError = '<div><div class="alert alert-danger" role="alert">';
+$closeTemplateError = '</div></div>';
+$this->formElementErrors()
+    ->setMessageOpenFormat($openTemplateError)
+    ->setMessageCloseString($closeTemplateError);
+?>
+
+<section id="registration" class="space20">
+    <div class="container">
+    	<div class="row">
+    		<div class="col-xs-12">
+    			<div class="logo">
+					<a href="<?php echo $this->url('home') ?>"
+						title="<?php echo $this->translate('Skapptest') ?>"> <i
+						class="logo"></i>
+					</a>
+				</div>
+    		</div>
+    	</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            	<div class="">
+                <h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("REGISTRATION_TITLE")) ; ?></h1>
+                <?= $this->form()->openTag($registrationForm); ?>
+                <div class="form-group">
+                    <label tooltip-append-to-body="true" tooltip="<?=$this->escapehtmlattr($this->translate('USER_FORM_NAME_USERNAME_TOOLTIP'))?>"><?= ucfirst($this->translate("userName")) ; ?> <i class="fa fa-question-circle"></i></label>
+                	<?php // Render element
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_USERNAME);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("userName")),
+                                'data-ng:model' => UserFieldSet::INPUT_NAME_USERNAME,
+                                'data-ng-init' => UserFieldSet::INPUT_NAME_USERNAME . "='". $element->getValue() ."'",
+                                'data-skapp-filter-pattern' => '[0-9A-Za-z_]*',
+                                'data-skapp-filter-max-length' => 15,
+                                'data-skapp-filter-lowercase' => '',
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_EMAIL);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("email"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                <div class="form-group">
+                    <label tooltip-append-to-body="true" tooltip="<?=$this->escapehtmlattr($this->translate('USER_FORM_NAME_PASSWORD_TOOLTIP'))?>"><?= ucfirst($this->translate("password")) ; ?> <i class="fa fa-question-circle"></i></label>
+                	<?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_PASSWORD);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("password"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("repeat password")) ; ?></label>
+                    <?php
+                    $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("repeat password"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                <div class="checkbox">
+                	<label>
+                    <?php
+                        $element = $registrationForm->get('privacy');
+                        $element->setAttributes(
+                            [
+                                'class' => 'checkbox'
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                    <?= ucfirst($this->translate("I have read and understand")) ; ?>
+                        <a href="<?//= //$this->url('terms'); @TODO missing terms/privacy routes ?>" title="<?= $this->translate('Terms and legal notes') ?>" target="_blank"><?= $this->translate('Terms and legal notes') ?></a>
+                        <?= $this->translate('and') ?>
+                        <a href="<?//= //$this->url('privacy'); ?>" title="<?= $this->translate('Privacy Policy') ?>" target="_blank"><?= $this->translate('Privacy Policy') ?></a>.
+                    </label>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                <button type="submit" class="btn btn-border btn-register btn-block btn-lg">
+                    <?= ucfirst($this->translate("REGISTRATION_BUTTON")) ; ?>
+                </button>
+                <div class="form-group">
+                	<a href="<?= $this->url('login'); ?>" ><?= ucfirst($this->translate('already registered?')); ?></a>
+                </div>
+                <?= $this->form()->closeTag(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

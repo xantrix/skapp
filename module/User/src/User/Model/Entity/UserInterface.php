@@ -1,5 +1,5 @@
 <?php
-namespace User\Model;
+namespace User\Model\Entity;
 
 use Matryoshka\Model\Object\IdentityAwareInterface;
 use Zend\Permissions\Acl\Role\RoleInterface;
@@ -16,7 +16,9 @@ interface UserInterface extends IdentityAwareInterface, RoleInterface, DateAware
 {
 
     const ROLE_USER = 'user';
-
+	const GENDER_MAN = 'm';
+	const GENDER_WOMAN = 'f';
+    
     const BCRYPT_COST = 10;
 
     /**

@@ -1,5 +1,5 @@
 <?php
-namespace User\Model;
+namespace User\Model\Entity;
 
 use Application\Model\AbstractEntity;
 use Zend\Crypt\Password\Bcrypt;

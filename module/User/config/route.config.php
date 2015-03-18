@@ -12,10 +12,26 @@ return [
                     ],
                 ],
             ],
-            // The following is a route to simplify getting started creating
-            // new controllers and actions without needing to create a new
-            // module. Simply drop new controllers in, and you can access them
-            // using the path /application/:controller/:action
+            'login'        => [
+                'type'    => 'Zend\Mvc\Router\Http\Literal',
+                'options' => [
+                    'route'    => '/user/login',
+                    'defaults' => [
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
+            'registration'        => [
+                'type'    => 'Zend\Mvc\Router\Http\Literal',
+                'options' => [
+                    'route'    => '/user/registration',
+                    'defaults' => [
+                        'controller' => 'User\Controller\User',
+                        'action'     => 'registration',
+                    ],
+                ],
+            ],
             'user' => [
                 'type'          => 'Literal',
                 'options'       => [
@@ -31,16 +47,47 @@ return [
                     'default' => [
                         'type'    => 'Segment',
                         'options' => [
-                            'route'       => '/[:controller[/:action]]',
+                            'route'       => '[/:action]',
                             'constraints' => [
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
                             ],
                             'defaults'    => [],
                         ],
                     ],
-                ],
-            ],
+		            'recover-password'        => [
+		                'type'    => 'Zend\Mvc\Router\Http\Literal',
+		                'options' => [
+		                    'route'    => '/recover-password',
+		                    'defaults' => [
+		                        'action'     => 'recover-password',
+		                    ],
+		                ],
+		            ],
+		            'admin' => [
+		                'type'          => 'Literal',
+		                'options'       => [
+		                    'route'    => '/admin',
+		                    'defaults' => [
+		                        'controller'    => 'Admin',
+		                        'action'        => 'index',
+		                    ],
+		                ],
+		                'may_terminate' => false,
+		                'child_routes'  => [
+		                    'default' => [
+		                        'type'    => 'Segment',
+		                        'options' => [
+		                            'route'       => '[/:action]',
+		                            'constraints' => [
+		                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
+		                            ],
+		                            'defaults'    => [],
+		                        ],
+		                    ],
+		                ],
+		            ],//admin		                                
+                ],//user->child
+            ],//user
         ],
     ],
 

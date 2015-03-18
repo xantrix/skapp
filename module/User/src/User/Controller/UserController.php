@@ -70,14 +70,14 @@ class UserController extends AbstractActionController
             return $this->redirect()->toUrl($next);
         }
 
-        $loginForm = null; // TODO
+        $formLogin = $this->serviceLocator->get('FormElementManager')->get('User\Form\LoginForm');
 
         if (is_array($prg)) {
-            $loginForm->setData($prg);
-            if ($loginForm->isValid()) {
+            $formLogin->setData($prg);
+            if ($formLogin->isValid()) {
                 $result = $this->interactiveAuth()->login(
-                    $loginForm->get('email')->getValue(),
-                    $loginForm->get('password')->getValue()
+                    $formLogin->get('email')->getValue(),
+                    $formLogin->get('password')->getValue()
                 );
 
                 if ($result) {
@@ -91,22 +91,31 @@ class UserController extends AbstractActionController
                 }
 
                 // FIXME: find a better way to handle errors
-                $loginForm->setMessages(array('email' => $errors));
+                $formLogin->setMessages(array('email' => $errors));
             }
         }
 
         return new ViewModel([
-           'loginForm' => $loginForm
+           'formLogin' => $formLogin
         ]);
 
     }
 
-    public function resetPasswordAction()
+    public function registrationAction()
+    {
+    	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');
+    	
+    	return new ViewModel([
+           'registrationForm' => $registrationForm
+    	]);
+    }
+    
+    public function recoverPasswordAction()
     {
     	return new ViewModel();
     }
 
-    //athenticated actions
+    //authenticated actions
     public function logoutAction()
     {
         if (!$this->identity()) {

@@ -1,1 +1,75 @@
-user login
+<?php
+	$formLogin = $this->formLogin;
+    //$this->layout('layout/layout-minimal');
+    $formLogin->setAttribute('action', $this->url('login'));
+    $formLogin->prepare();
+    $formLogin->setAttributes(["autocomplete" => "off"]);
+    $openTemplateError = '<div><div class="alert alert-danger" role="alert">';
+    $closeTemplateError = '</div></div>';
+    $this->formElementErrors()
+        ->setMessageOpenFormat($openTemplateError)
+        ->setMessageCloseString($closeTemplateError);
+    /* @var $element \Zend\Form\Element */
+?>
+<section id="registration" class="space20">
+    <div class="container">
+    	<div class="row">
+    		<div class="col-xs-12">
+    			<div class="logo">
+					<a href="<?php echo $this->url('home') ?>"
+						title="<?php echo $this->translate('Skapptest') ?>"> <i
+						class="logo"></i>
+					</a>
+				</div>
+    		</div>
+    	</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            	<div class="">
+            	<h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("LOGIN_TITLE")) ; ?></h1>
+                <?php echo $this->form()->openTag($formLogin); ?>
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
+                    <?php // Render element
+                        $element = $formLogin->get(\User\Form\LoginForm::INPUT_NAME_EMAIL);
+                        $element->setAttributes(
+                            [
+                                'class'        => 'form-control',
+                                "autocomplete" => "off",
+                                'placeholder'  => ucfirst($this->translate("email"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?php  echo $this->formElementErrors($element); ?>
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("password")) ; ?></label>
+                    <?php
+                        $element = $formLogin->get(\User\Form\LoginForm::INPUT_NAME_PASSWORD);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                "autocomplete" => "off",
+                                'placeholder' => ucfirst($this->translate("password"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?php  echo $this->formElementErrors($element);  ?>
+                <button type="submit" class="btn btn-border btn-register btn-block btn-lg">
+                    <?= ucfirst($this->translate("LOGIN_BUTTON")) ; ?>
+                </button>
+                <div class="form-group">
+                	<a href="<?= $this->url('user/recover-password'); ?>" ><?= ucfirst($this->translate('forgot your password?')); ?></a>
+                </div>
+                <div class="form-group">
+                	<a href="<?= $this->url('registration'); ?>" ><?= ucfirst($this->translate('want to register?')); ?></a>
+                </div>
+                <?php echo $this->form()->closeTag(); ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

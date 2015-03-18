@@ -7,7 +7,7 @@ return [
     ],
     'matryoshka-objects' => [ // Object abstract service factory
         'User' => [
-            'type'                   => 'User\Model\UserEntity',
+            'type'                   => 'User\Model\Entity\UserEntity',
             'active_record_criteria' => 'Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria',
             'hydrator'               => 'User\Model\Hydrator\UserEntityHydrator',
         ],
