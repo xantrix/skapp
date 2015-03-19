@@ -63,6 +63,24 @@ return [
 		                    ],
 		                ],
 		            ],
+		            'profile'        => [
+		                'type'    => 'Zend\Mvc\Router\Http\Literal',
+		                'options' => [
+		                    'route'    => '/profile',
+		                    'defaults' => [
+		                        'action'     => 'profile',
+		                    ],
+		                ],
+		            ],
+		            'logout'        => [
+		                'type'    => 'Zend\Mvc\Router\Http\Literal',
+		                'options' => [
+		                    'route'    => '/logout',
+		                    'defaults' => [
+		                        'action'     => 'logout',
+		                    ],
+		                ],
+		            ],		            		            
 		            'admin' => [
 		                'type'          => 'Literal',
 		                'options'       => [

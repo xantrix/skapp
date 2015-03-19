@@ -23,7 +23,7 @@ class UserController extends AbstractActionController
 	protected $userModel;
 
 	/**
-	 * @var \User\Model\UserEntity
+	 * @var \User\Model\Entity\UserEntity
 	 */
 	protected $user;
 
@@ -31,12 +31,17 @@ class UserController extends AbstractActionController
     {
     	$this->userModel = $this->model()->get('User\Model\UserModel');
 
-    	//create
-    	$this->user = $this->userModel->create();
-    	$this->user->setEmail('test@test.com');
-    	//$this->user->save();
-    	//$writableCriteria = \Matryoshka\Model\Criteria\WritableCriteriaInterface;
-    	//$this->userModel->save($writableCriteria, $dataOrObject);
+    	//create test list
+    	if($this->userModel->getDataGateway()->count() == 0){
+	    	for ($i = 0; $i < 12; $i++) {
+	    		$this->user = $this->userModel->create();
+		    	$this->user->setEmail("test$i@test.com");
+		    	$this->user->setPassword('Password123');
+		    	$this->user->save();
+		    	//$writableCriteria = \Matryoshka\Model\Criteria\WritableCriteriaInterface;
+		    	//$this->userModel->save($writableCriteria, $dataOrObject);	    		
+	    	}
+    	}
 
     	//find
 		$users = $this->userModel->find(
@@ -75,12 +80,13 @@ class UserController extends AbstractActionController
         if (is_array($prg)) {
             $formLogin->setData($prg);
             if ($formLogin->isValid()) {
-                $result = $this->interactiveAuth()->login(
+                //ModelAdapter::authenticate -> modelObject::findByIdentity -> $identityObject::validateCredential
+            	$result = $this->interactiveAuth()->login(
                     $formLogin->get('email')->getValue(),
                     $formLogin->get('password')->getValue()
                 );
 
-                if ($result) {
+                if ($result->isValid()) {
                     //OK! User logged in successfully
                     return $this->redirect()->toUrl($next);
                 }

@@ -34,7 +34,7 @@ return [
     'session_config' => [
         'name'                  => 'PHPSID',
         'use_cookies'           => true,
-        'cookie_domain'         => 'yourdomain.com',
+        'cookie_domain'         => 'skapptest.local', //yourdomain.com
         'cookie_httponly'       => true,
         'cookie_lifetime'       => 2592000, //30 days
         'remember_me_seconds'   => 2592000, //30 days
@@ -45,14 +45,14 @@ return [
     ],
     'session_save_handler_mongo' => [
         'hosts'      => '127.0.0.1:27017',
-        'database'   => 'yourdatabase',
+        'database'   => 'skapp', //yourdatabase
         'collection' => 'sessions',
     ],
     // Mongo Connection for matryoshka
     'mongodb' => [
         'DataBase\MongoDb' => [
             'hosts' => '127.0.0.1:27017',
-            'database' => 'skapp'
+            'database' => 'skapp' //yourdatabase
         ],
     ],
 ];
