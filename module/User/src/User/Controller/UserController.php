@@ -39,7 +39,7 @@ class UserController extends AbstractActionController
 		    	$this->user->setPassword('Password123');
 		    	$this->user->save();
 		    	//$writableCriteria = \Matryoshka\Model\Criteria\WritableCriteriaInterface;
-		    	//$this->userModel->save($writableCriteria, $dataOrObject);	    		
+		    	//$this->userModel->save($writableCriteria, $dataOrObject);
 	    	}
     	}
 
@@ -109,13 +109,33 @@ class UserController extends AbstractActionController
 
     public function registrationAction()
     {
+        $prg = $this->prg();
+        if ($prg instanceof Response) {
+            return $prg;
+        }
+        /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');
-    	
+    	/* @var $user \User\Model\EntityUserEntity */
+    	$user = $this->userModel = $this->model()->get('User\Model\UserModel')->create();
+    	$registrationForm->bind($user);
+    	// TODO: if only some field must be required then use setValidationGroup
+
+    	if (is_array($prg)) {
+    	    $registrationForm->setData($prg);
+    	    if ($registrationForm->isValid()) {
+                $user->save();
+                $viewModel = new ViewModel();
+//                 $viewModel->setTemplate(''); // TODO: set thankyou page
+                return $viewModel;
+    	    }
+    	    // else... show errors
+    	}
+
     	return new ViewModel([
            'registrationForm' => $registrationForm
     	]);
     }
-    
+
     public function recoverPasswordAction()
     {
     	return new ViewModel();
