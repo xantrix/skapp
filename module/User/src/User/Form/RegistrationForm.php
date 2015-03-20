@@ -86,6 +86,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_EMAIL)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_EMAIL);
                 $input->setRequired(true);
+                $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
             }
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD)) {

@@ -3,8 +3,10 @@ namespace User;
 
 use Zend\Mvc\MvcEvent;
 use Zend\Stdlib\ArrayUtils;
+use Zend\ModuleManager\Feature\ValidatorProviderInterface;
+use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
 
-class Module
+class Module implements ValidatorProviderInterface, ViewHelperProviderInterface
 {
 
 	public function onBootstrap(MvcEvent $e)
@@ -20,9 +22,20 @@ class Module
         return $config;
     }
 
+    /**
+     * {inheritdoc}
+     */
     public function getViewHelperConfig()
     {
         return include __DIR__ . '/config/viewhelper.config.php';
+    }
+
+    /**
+     * {inheritdoc}
+     */
+    public function getValidatorConfig()
+    {
+        return include __DIR__ . '/config/validator.config.php';
     }
 
     public function getAutoloaderConfig()
