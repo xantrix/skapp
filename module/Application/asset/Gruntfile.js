@@ -24,6 +24,8 @@ module.exports = function (grunt) {
                 },
                 dist: {
                     src: [
+                        '<%= config.app %>/vendor/jquery/dist/jquery.js',
+                        '<%= config.app %>/vendor/bootstrap/dist/js/bootstrap.js',
                         '<%= config.app %>/vendor/angular/angular.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
