@@ -9,6 +9,7 @@ $registrationForm->setAttribute('action', $this->url('registration'));
 $registrationForm->setAttribute('autocomplete', 'off');
 $registrationForm->prepare();
 $fieldSetRegistration = $registrationForm->get(\User\Form\FieldSet\UserFieldSet::NAME);
+$validationGroup = $registrationForm->getValidationGroup();
 
 $openTemplateError = '<div><div class="alert alert-danger" role="alert">';
 $closeTemplateError = '</div></div>';
@@ -34,6 +35,8 @@ $this->formElementErrors()
             	<div class="">
                 <h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("REGISTRATION_TITLE")) ; ?></h1>
                 <?= $this->form()->openTag($registrationForm); ?>
+                
+                <?php if($validationGroup && in_array('username', $validationGroup)) :?>
                 <div class="form-group">
                     <label tooltip-append-to-body="true" tooltip="<?=$this->escapehtmlattr($this->translate('USER_FORM_NAME_USERNAME_TOOLTIP'))?>"><?= ucfirst($this->translate("userName")) ; ?> <i class="fa fa-question-circle"></i></label>
                 	<?php // Render element
@@ -53,6 +56,8 @@ $this->formElementErrors()
                     ?>
                 </div>
                 <?= $this->formElementErrors($element); ?>
+                <?php endif; ?>
+                
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
                     <?php

@@ -16,6 +16,7 @@ class UserController extends AbstractActionController
      * @var string
      */
     protected $defaultRedirectRouteName = 'home';
+    protected $profileRouteName = 'user/profile';
 
 	/**
 	 * @var \User\Model\UserModel
@@ -67,7 +68,7 @@ class UserController extends AbstractActionController
 
         // post login redirect url
         $next = $this->params()->fromQuery('next', $this->url()->fromRoute(
-            $this->defaultRedirectRouteName
+            $this->profileRouteName
         ));
 
         if ($this->identity()) {
@@ -75,15 +76,15 @@ class UserController extends AbstractActionController
             return $this->redirect()->toUrl($next);
         }
 
-        $formLogin = $this->serviceLocator->get('FormElementManager')->get('User\Form\LoginForm');
+        $loginForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\LoginForm');
 
         if (is_array($prg)) {
-            $formLogin->setData($prg);
-            if ($formLogin->isValid()) {
+            $loginForm->setData($prg);
+            if ($loginForm->isValid()) {
                 //ModelAdapter::authenticate -> modelObject::findByIdentity -> $identityObject::validateCredential
             	$result = $this->interactiveAuth()->login(
-                    $formLogin->get('email')->getValue(),
-                    $formLogin->get('password')->getValue()
+                    $loginForm->get('email')->getValue(),
+                    $loginForm->get('password')->getValue()
                 );
 
                 if ($result->isValid()) {
@@ -97,12 +98,12 @@ class UserController extends AbstractActionController
                 }
 
                 // FIXME: find a better way to handle errors
-                $formLogin->setMessages(array('email' => $errors));
+                $loginForm->setMessages(array('email' => $errors));
             }
         }
 
         return new ViewModel([
-           'formLogin' => $formLogin
+           'loginForm' => $loginForm
         ]);
 
     }
@@ -118,15 +119,18 @@ class UserController extends AbstractActionController
     	/* @var $user \User\Model\EntityUserEntity */
     	$user = $this->userModel = $this->model()->get('User\Model\UserModel')->create();
     	$registrationForm->bind($user);
-    	// TODO: if only some field must be required then use setValidationGroup
 
     	if (is_array($prg)) {
     	    $registrationForm->setData($prg);
     	    if ($registrationForm->isValid()) {
                 $user->save();
-                $viewModel = new ViewModel();
-//                 $viewModel->setTemplate(''); // TODO: set thankyou page
-                return $viewModel;
+               $viewModel = new ViewModel();
+                $viewModel->setTemplate('user/user/thank-you');
+               return $viewModel;
+                
+                /*return $this->redirect()->toUrl($this->url()->fromRoute(
+            		$this->profileRouteName
+        		));*/
     	    }
     	    // else... show errors
     	}

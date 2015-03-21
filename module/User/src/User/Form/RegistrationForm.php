@@ -13,7 +13,6 @@ use Zend\Validator\Identical;
 class RegistrationForm extends Form implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
-    //use UserNotRequiredInputTrait; @TODO missing file
 
     const NAME = 'registration-form';
 
@@ -48,10 +47,11 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
         // Add element
         $this->addInputPrivacy();
 
-        //$this->initUserFiledSetInputNotRequire($this->getInputFilter());@TODO missing method
-
         // Set InputFilter
         $this->initInputFilter();
+        
+        //Set ValidationGroup
+        $this->initValidationGroup();
     }
 
     /**
@@ -86,7 +86,8 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_EMAIL)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_EMAIL);
                 $input->setRequired(true);
-                $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
+                $noIdentityValidator = $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
+                $input->getValidatorChain()->attach($noIdentityValidator);
             }
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD)) {
@@ -115,4 +116,19 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
             $input->getValidatorChain()->attach($validator, true);*/
         }
     }
+    
+    /**
+     * 
+     */
+    protected function initValidationGroup()
+    {
+    	$this->setValidationGroup([
+    			'user-fieldset' => [
+					'email',
+    				'password',
+    				'password_re'
+    			]
+    	]);
+    }
+    
 }

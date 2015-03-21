@@ -1,9 +1,9 @@
 <?php
-	$formLogin = $this->formLogin;
+	$loginForm = $this->loginForm;
     //$this->layout('layout/layout-minimal');
-    $formLogin->setAttribute('action', $this->url('login'));
-    $formLogin->prepare();
-    $formLogin->setAttributes(["autocomplete" => "off"]);
+    $loginForm->setAttribute('action', $this->url('login'));
+    $loginForm->prepare();
+    $loginForm->setAttributes(["autocomplete" => "off"]);
     $openTemplateError = '<div><div class="alert alert-danger" role="alert">';
     $closeTemplateError = '</div></div>';
     $this->formElementErrors()
@@ -27,11 +27,11 @@
             <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
             	<div class="">
             	<h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("LOGIN_TITLE")) ; ?></h1>
-                <?php echo $this->form()->openTag($formLogin); ?>
+                <?php echo $this->form()->openTag($loginForm); ?>
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
                     <?php // Render element
-                        $element = $formLogin->get(\User\Form\LoginForm::INPUT_NAME_EMAIL);
+                        $element = $loginForm->get(\User\Form\LoginForm::INPUT_NAME_EMAIL);
                         $element->setAttributes(
                             [
                                 'class'        => 'form-control',
@@ -46,7 +46,7 @@
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("password")) ; ?></label>
                     <?php
-                        $element = $formLogin->get(\User\Form\LoginForm::INPUT_NAME_PASSWORD);
+                        $element = $loginForm->get(\User\Form\LoginForm::INPUT_NAME_PASSWORD);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
