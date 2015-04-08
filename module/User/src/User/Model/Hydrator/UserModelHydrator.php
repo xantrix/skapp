@@ -5,6 +5,9 @@ use Matryoshka\Model\Wrapper\Mongo\Hydrator\ClassMethods;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoDateStrategy;
+use Matryoshka\Model\Hydrator\Strategy\HasOneStrategy;
+use Application\Model\Object\Address\AddressObject;
+
 /**
  * Class UserModelHydrator
  *
@@ -21,9 +24,12 @@ class UserModelHydrator extends ClassMethods
     {
         parent::__construct(true);
 
-        // Convert DateTime to MongoDate and viceversa
+        // Convert DateTime to MongoDate and vice versa
         $this->addStrategy('date_created', new MongoDateStrategy());
         $this->addStrategy('date_modified', new MongoDateStrategy());
+        
+        //Add embedded object
+        $this->addStrategy('address', new HasOneStrategy(new AddressObject()));
 
         // Do not save password
         $this->filterComposite->addFilter(

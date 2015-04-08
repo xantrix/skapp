@@ -17,5 +17,15 @@ class UserModel extends ObservableModel implements AuthModelInterface
         return $this->find((new UserCollectionCriteria())->setEmail($identity));
     }
 
+    /**
+     * 
+     * @param string $from
+     * @param string $to
+     * @return Ambigous <\Matryoshka\Model\ResultSet\ResultSetInterface, boolean, NULL, \Zend\EventManager\mixed, mixed>
+     */
+    public function findByRegistrationDateRange($from, $to)
+    {
+    	return $this->find((new UserCollectionCriteria())->setCreatedDateFrom($from)->setCreatedDateTo($to));
+    }
 
 }

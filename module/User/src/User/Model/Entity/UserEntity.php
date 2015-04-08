@@ -5,6 +5,7 @@ use Application\Model\AbstractEntity;
 use Zend\Crypt\Password\Bcrypt;
 use Application\Model\DateAwareTrait;
 use AuthModule\Identity\ObjectInterface as AuthObjectInterface;
+use Application\Model\Object\Address\AddressObject;
 
 class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInterface
 {
@@ -60,10 +61,29 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
      * @var string
      */
     protected $language;
-
-    /**
-	 * @return the $status
+	
+	/**
+	 * @var AddressObject
 	 */
+	protected $address;
+	
+    /**
+	 * @return the $address
+	 */
+	public function getAddress() {
+		return $this->address;
+	}
+
+	/**
+	 * @param AddressObject $address
+	 */
+	public function setAddress($address) {
+		$this->address = $address;
+	}
+
+	/**
+	 * @return the $status
+	 */	
 	public function getStatus() {
 		return $this->status;
 	}

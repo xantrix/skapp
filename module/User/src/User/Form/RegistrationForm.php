@@ -32,7 +32,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
     }
 
     /**
-     * Init
+     * Init fieldsets, elements, inputFilter and validationGroup
      */
     public function init()
     {
@@ -70,13 +70,13 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
     }
 
     /**
-     *
+     * Set the inputFilter for this form
      */
     protected function initInputFilter()
     {
         $inputFilter = $this->getInputFilter();
         if ($inputFilter->has(UserFieldSet::NAME)) {
-            $inputFilterFieldSet = $inputFilter->get(UserFieldSet::NAME);
+            $inputFilterFieldSet = $inputFilter->get(UserFieldSet::NAME);//get UserFieldSet
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_USERNAME)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_USERNAME);
@@ -86,6 +86,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_EMAIL)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_EMAIL);
                 $input->setRequired(true);
+                //add identity exists (email) validator: NoIdentityExistsFactory-> new NoIdentityExists, setCriteria,setModel, findIdentity
                 $noIdentityValidator = $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
                 $input->getValidatorChain()->attach($noIdentityValidator);
             }
@@ -98,6 +99,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD_RE)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
                 $input->setRequired(true);
+                //add retype password validator
                 $input->getValidatorChain()->attach(new Identical(['token' => UserFieldSet::INPUT_NAME_PASSWORD]));
             }
         }
@@ -118,7 +120,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
     }
     
     /**
-     * 
+     * Set the validation group for this form
      */
     protected function initValidationGroup()
     {

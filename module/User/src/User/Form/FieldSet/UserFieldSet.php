@@ -1,6 +1,7 @@
 <?php
 namespace User\Form\FieldSet;
 
+use Application\Form\FieldSet\AddressFieldSet;
 use User\Model\Entity\UserEntity;
 use User\Model\Entity\UserInterface;
 use Zend\Form\Element;
@@ -45,7 +46,7 @@ class UserFieldSet extends Fieldset
             ->addInputPasswordRe()
             ->addInputUserName()
             ->addInputEmail()
-            //->addInputAddress()
+            ->addInputAddress()//AddressFieldSet
             ->addInputLanguage()
         ;
     }
