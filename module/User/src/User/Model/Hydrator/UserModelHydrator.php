@@ -6,7 +6,10 @@ use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoDateStrategy;
 use Matryoshka\Model\Hydrator\Strategy\HasOneStrategy;
+use Matryoshka\Model\Hydrator\Strategy\HasManyStrategy;
 use Application\Model\Object\Address\AddressObject;
+use User\Model\Object\Role\RoleObject;
+use User\Model\Object\Role\Collection\RoleCollection;
 
 /**
  * Class UserModelHydrator
@@ -30,6 +33,8 @@ class UserModelHydrator extends ClassMethods
         
         //Add embedded object
         $this->addStrategy('address', new HasOneStrategy(new AddressObject()));
+        //Add object collection
+        $this->addStrategy('roles', new HasManyStrategy(new RoleObject(),new RoleCollection()));
 
         // Do not save password
         $this->filterComposite->addFilter(

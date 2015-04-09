@@ -12,7 +12,7 @@ use Application\Model\DateAwareInterface;
  * All users who can log in to the system must implement this interface.
  *
  */
-interface UserInterface extends IdentityAwareInterface, RoleInterface, DateAwareInterface
+interface UserInterface extends IdentityAwareInterface, /*RoleInterface,*/ DateAwareInterface
 {
 
     const ROLE_USER = 'user';
@@ -80,12 +80,12 @@ interface UserInterface extends IdentityAwareInterface, RoleInterface, DateAware
      * @param string $role
      * @return self
     */
-    public function setRoleId($role);
+    //public function setRoleId($role);
 
     /**
      * @return string
     */
-    public function getRoleId();
+    //public function getRoleId();
 
     /**
      * @param int $status

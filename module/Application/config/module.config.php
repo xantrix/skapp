@@ -47,7 +47,8 @@ return [
     ],
     'controllers'           => [
         'invokables' => [
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+			'Application\Controller\Test' => 'Application\Controller\TestController'            		
         ],
     ],
     'view_manager'          => [
@@ -61,6 +62,7 @@ return [
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'pagination/default' => __DIR__ . '/../view/partials/pagination/default.phtml',
         ],
         'template_path_stack'      => [
             __DIR__ . '/../view',

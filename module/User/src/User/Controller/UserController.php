@@ -1,5 +1,4 @@
 <?php
-
 namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
@@ -11,7 +10,6 @@ use Zend\Http\Response;
  */
 class UserController extends AbstractActionController
 {
-
     /**
      * @var string
      */
@@ -28,35 +26,10 @@ class UserController extends AbstractActionController
 	 */
 	protected $user;
 
-    public function indexAction()
-    {
-    	$this->userModel = $this->model()->get('User\Model\UserModel');
-
-    	//create test list
-    	if($this->userModel->getDataGateway()->count() == 0){
-	    	for ($i = 0; $i < 12; $i++) {
-	    		$this->user = $this->userModel->create();
-		    	$this->user->setEmail("test$i@test.com");
-		    	$this->user->setPassword('Password123');
-		    	$this->user->save();
-		    	//$writableCriteria = \Matryoshka\Model\Criteria\WritableCriteriaInterface;
-		    	//$this->userModel->save($writableCriteria, $dataOrObject);
-	    	}
-    	}
-
-    	//find
-		$users = $this->userModel->find(
-		    new \Matryoshka\Model\Criteria\CallbackCriteria(
-		        function ($model) {
-		            $dataGateway = $model->getDataGateway();
-		            return $dataGateway->find()->limit(100);
-		        }
-		    )
-		);
-        return new ViewModel([
-			'users' => $users
-        ]);
-    }
+	public function indexAction()
+	{
+		return true;
+	}
 
     //unauthenticated actions
     public function loginAction()

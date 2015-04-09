@@ -6,6 +6,9 @@ use Zend\Crypt\Password\Bcrypt;
 use Application\Model\DateAwareTrait;
 use AuthModule\Identity\ObjectInterface as AuthObjectInterface;
 use Application\Model\Object\Address\AddressObject;
+use User\Model\Object\Role\Collection\RoleCollection;
+use User\Model\Object\Role\RoleObject;
+use User\Model\Object\Role\RoleInterface;
 
 class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInterface
 {
@@ -43,9 +46,9 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
     protected $userName;
 
     /**
-     * @var string
+     * @var RoleCollection
      */
-    protected $roleId;
+    protected $roles;
 
     /**
      * @var string
@@ -67,7 +70,7 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	 */
 	protected $address;
 	
-    /**
+	/**
 	 * @return the $address
 	 */
 	public function getAddress() {
@@ -203,28 +206,44 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
         return $this;
     }
 
-
     /**
-     * @param string $role
-     * @return $this
-     */
-    public function setRoleId($role)
-    {
-        $this->roleId = $role;
-        return $this;
-    }
+	 * @return RoleCollection
+	 */
+	public function getRoles() {
+		return $this->roles;
+	}
 
+	/**
+	 * @param RoleCollection $roles
+	 */
+	public function setRoles($roles) {
+		$this->roles = $roles;
+	}
+
+	public function hasRole(RoleInterface $entry){
+		return $this->roles->has($entry);
+	}
+	
+	public function addRole(RoleInterface $entry){
+		return $this->roles->add($entry);
+	}	
+	
+	public function removeRole(RoleInterface $entry){
+		return $this->roles->remove($entry);
+	}	
+	
     /**
      * @return string|null
      */
-    public function getRoleId()
+    /*public function getRoleId()
     {
-        if (!$this->roleId) {
-            $this->roleId = UserInterface::ROLE_USER;
+        if (!$this->roles) {
+            $this->addRole(new RoleObject(UserInterface::ROLE_USER));
         }
-        return $this->roleId;
-    }
+        //return $this->roles->first();
+    }*/
 
+    
     /**
      * @param string $registrationToken
      * @return $this

@@ -1,0 +1,21 @@
+<?php /* @var $user \User\Model\Entity\UserEntity */ 
+use Zend\Debug\Debug;
+?>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Users</h1>
+    </div>
+    <div class="col-xs-12">
+        <ul class="fa-ul">
+        <?php foreach ($this->users as $user) :?>
+          <li><i class="fa-li fa fa-square"></i>
+          <?= $user->getId()?> - <?= $user->getEmail()?> - <?= $user->getDateCreated()->format(DateTime::ISO8601)?>
+          <?//= Debug::dump($user->getAddress())?> - <?//= Debug::dump($user->getRoles()->getArrayCopy()) ?>
+
+          </li>
+        <?php endforeach;?>
+        <?php echo $this->paginationControl($this->users, 'Sliding', 'pagination/default'); ?>
+        </ul>
+    </div>
+</div>

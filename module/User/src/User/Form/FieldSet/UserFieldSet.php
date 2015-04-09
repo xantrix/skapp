@@ -46,7 +46,8 @@ class UserFieldSet extends Fieldset
             ->addInputPasswordRe()
             ->addInputUserName()
             ->addInputEmail()
-            ->addInputAddress()//AddressFieldSet
+            ->addInputAddress() //AddressFieldSet
+            ->addInputRoles() //RoleFieldset
             ->addInputLanguage()
         ;
     }
@@ -152,6 +153,21 @@ class UserFieldSet extends Fieldset
         return $this;
     }
 
+    /**
+     * @return $this
+     */
+    public function addInputRoles()
+    {
+        $collectionRole = new Element\Collection('roles');
+        $collectionRole->setCount(2)
+            ->setAllowAdd(true)
+            ->setShouldCreateTemplate(true)
+            ->setTargetElement(new RoleFieldSet());
+
+        $this->add($collectionRole);
+        return $this;
+    }    
+    
     /**
      * @return $this
      */
