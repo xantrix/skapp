@@ -18,7 +18,7 @@ class RoleFieldSet extends Fieldset
 	
     public function addRoleId()
     {
-        $elementText = new Element\Text('roleId');
+        $elementText = new Element\Text('role_id');
 
         $this->add($elementText);
         return $this;

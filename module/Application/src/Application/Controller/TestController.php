@@ -59,7 +59,7 @@ class TestController extends AbstractActionController {
 		    	$dobFormValue = $registrationForm->get('user-fieldset')->get('dob')->getValue();
 		    	$addressCountryFormValue = $registrationForm->get('user-fieldset')->get('address')->get('address_country')->getValue();
 		    	$cat0FormValue = $registrationForm->get('user-fieldset')->get('categories')->get('0')->get('name')->getValue();
-		    	$role0FormValue = $registrationForm->get('user-fieldset')->get('roles')->get('0')->get('roleId')->getValue();//FIXME
+		    	$role0FormValue = $registrationForm->get('user-fieldset')->get('roles')->get('0')->get('role_id')->getValue();
 				
 				//set data
 				$prg = [
@@ -76,7 +76,7 @@ class TestController extends AbstractActionController {
 		                	'address_locality' =>	"Locality$i",
 		                ],
 		                'roles' => [
-		                    ['role_id' => 'Guest'],//FIXME
+		                    ['role_id' => 'Guest'],
 		                    ['role_id' => 'User'],
 		                ],		                
 		            ]
@@ -87,7 +87,7 @@ class TestController extends AbstractActionController {
 						'email',
 	    				'password',
 		    			'dob',
-		    			'categories' => [ //collection fieldset item fields
+		    			'categories' => [ //collection fieldset item fields //FIXME
 							'name'
 				    	],
 		                'address' => [ //nested fieldset
