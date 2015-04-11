@@ -8,6 +8,7 @@ use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoDateStrategy;
 use Matryoshka\Model\Hydrator\Strategy\HasOneStrategy;
 use Matryoshka\Model\Hydrator\Strategy\HasManyStrategy;
 use Application\Model\Object\Address\AddressObject;
+use Application\Model\Object\Category\CategoryObject;
 use User\Model\Object\Role\RoleObject;
 use User\Model\Object\Role\Collection\RoleCollection;
 
@@ -30,11 +31,13 @@ class UserModelHydrator extends ClassMethods
         // Convert DateTime to MongoDate and vice versa
         $this->addStrategy('date_created', new MongoDateStrategy());
         $this->addStrategy('date_modified', new MongoDateStrategy());
+        $this->addStrategy('dob', new MongoDateStrategy());
         
         //Add embedded object
         $this->addStrategy('address', new HasOneStrategy(new AddressObject()));
         //Add object collection
         $this->addStrategy('roles', new HasManyStrategy(new RoleObject(),new RoleCollection()));
+        $this->addStrategy('categories', new HasManyStrategy(new CategoryObject()));
 
         // Do not save password
         $this->filterComposite->addFilter(

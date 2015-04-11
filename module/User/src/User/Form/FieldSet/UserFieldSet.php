@@ -2,6 +2,7 @@
 namespace User\Form\FieldSet;
 
 use Application\Form\FieldSet\AddressFieldSet;
+use Application\Form\FieldSet\CategoryFieldSet;
 use User\Model\Entity\UserEntity;
 use User\Model\Entity\UserInterface;
 use Zend\Form\Element;
@@ -23,6 +24,8 @@ class UserFieldSet extends Fieldset
     const INPUT_NAME_LAST_NAME     = 'last_name';
     const INPUT_NAME_PHONE_NUMBER  = 'phone_number';
     const INPUT_NAME_GENDER        = 'gender';
+    const INPUT_NAME_DOB        = 'dob';
+    const INPUT_NAME_CATEGORIES   = 'categories';
     const INPUT_NAME_LANGUAGE      = 'language';
     const INPUT_NAME_MOBILE_PHONE_NUMBER  = 'mobile_phone_number';
 
@@ -38,6 +41,8 @@ class UserFieldSet extends Fieldset
         // Add element
         $this
             ->addInputGender()
+            ->addInputDob()
+            ->addInputCategories() //CategoryFieldSet
             ->addInputFirsName()
             ->addInputLastName()
             ->addInputMobilePhoneNumber()
@@ -136,8 +141,6 @@ class UserFieldSet extends Fieldset
     {
         $element = new Element\Text(self::INPUT_NAME_MOBILE_PHONE_NUMBER);
         $this->add($element);
-        
-        
 
         return $this;
     }
@@ -186,6 +189,32 @@ class UserFieldSet extends Fieldset
         return $this;
     }
 
+    /**
+     * @return $this
+     */
+    public function addInputDob()
+    {
+        $element = new Element\Text(self::INPUT_NAME_DOB);
+        $this->add($element);
+
+        return $this;
+    }    
+    
+    /**
+     * @return $this
+     */
+    public function addInputCategories()
+    {
+        $collectionRole = new Element\Collection('categories');
+        $collectionRole->setCount(2)
+            ->setAllowAdd(true)
+            ->setShouldCreateTemplate(true)
+            ->setTargetElement(new CategoryFieldSet());
+
+        $this->add($collectionRole);
+        return $this;
+    }     
+    
     public function addInputLanguage()
     {
         $element = new Element\Select(self::INPUT_NAME_LANGUAGE);

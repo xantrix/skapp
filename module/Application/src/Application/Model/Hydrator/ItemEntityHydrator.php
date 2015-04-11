@@ -1,5 +1,5 @@
 <?php
-namespace User\Model\Hydrator;
+namespace Application\Model\Hydrator;
 
 use Matryoshka\Model\Hydrator\ClassMethods;
 use Matryoshka\Model\Hydrator\Strategy\DateTimeStrategy;
@@ -7,12 +7,12 @@ use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 
 /**
- * Class UserEntityHydrator
+ * Class ItemEntityHydrator
  *
  * This hydrator is used to extract data from entity to other components (form, view etc..)
  *
  */
-class UserEntityHydrator extends ClassMethods
+class ItemEntityHydrator extends ClassMethods
 {
        /**
      * {@inheritdoc}
@@ -24,11 +24,9 @@ class UserEntityHydrator extends ClassMethods
         // Convert DateTime to a formated string and viceversa
         $this->addStrategy('date_created', new DateTimeStrategy());
         $this->addStrategy('date_modified', new DateTimeStrategy());
-        $this->addStrategy('dob', new DateTimeStrategy());
 
         // Remove hidden field from output
-        $this->filterComposite->addFilter('passwordCrypt', new MethodMatchFilter('getPasswordCrypt'), FilterComposite::CONDITION_AND);
-        $this->filterComposite->addFilter('recoverPasswordToken', new MethodMatchFilter('getRecoverPasswordToken'), FilterComposite::CONDITION_AND);
-        $this->filterComposite->addFilter('registrationToken', new MethodMatchFilter('getRegistrationToken'), FilterComposite::CONDITION_AND);
-    }
+        //$this->filterComposite->addFilter('some', new MethodMatchFilter('getSome'), FilterComposite::CONDITION_AND);
+    }	
 }
+

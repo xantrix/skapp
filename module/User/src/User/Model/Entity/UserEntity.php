@@ -71,6 +71,64 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	protected $address;
 	
 	/**
+	 * date of birth
+	 * @var DateTime
+	 */
+	protected $dob;
+	
+	/**
+	 * @var string
+	 */
+	protected $gender;
+	
+	/**
+	 * @var array
+	 */
+	protected $categories;
+	
+	/**
+	 * @return the $dob
+	 */
+	public function getDob() {
+		return $this->dob;
+	}
+
+	/**
+	 * @return the $gender
+	 */
+	public function getGender() {
+		return $this->gender;
+	}
+
+	/**
+	 * @return the $categories
+	 */
+	public function getCategories() {
+		return $this->categories;
+	}
+
+	/**
+	 * @param \User\Model\Entity\DateTime $dob
+	 */
+	public function setDob($dob) {
+		$this->dob = $dob;
+	}
+
+	/**
+	 * @param string $gender
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+	}
+
+	/**
+	 * @param multitype: $categories
+	 */
+	public function setCategories($categories) {
+		$this->categories = $categories;
+	}
+
+	/**
 	 * @return the $address
 	 */
 	public function getAddress() {

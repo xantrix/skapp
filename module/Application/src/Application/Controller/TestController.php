@@ -5,6 +5,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use User\Model\Criteria\UserCollectionCriteria;
 use Application\Model\Object\Address\AddressObject;
+use Application\Model\Object\Category\CategoryObject;
 use Application\Model\Traits\PaginatorTrait;
 use MongoDate;
 use User\Model\Object\Role\RoleObject;
@@ -41,10 +42,12 @@ class TestController extends AbstractActionController {
 		    	$mainAddress->setAddressCountry("country$i");
 		    	$mainAddress->setAddressLocality("locality$i");
 		    	$this->user->setAddress($mainAddress);
-		    	//set 2 roles
+		    	//set collection fields
 		    	$this->user->setRoles(new RoleCollection([ new RoleObject('guest'),  new RoleObject('user')]));
-		    	//set created date
+		    	$this->user->setCategories([ new CategoryObject('cat1'),  new CategoryObject('cat2')]);
+		    	//set dates
 		    	$this->user->setDateCreated(new \DateTime('now'));
+		    	$this->user->setDob(new \DateTime('now'));
 		    	
         		/* @var $registrationForm \User\Form\RegistrationForm */
     			$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');		    	
@@ -53,7 +56,9 @@ class TestController extends AbstractActionController {
 		    	//form is populated with bound object values.
 		    	$registrationForm->prepare();
 		    	$emailFormValue = $registrationForm->get('user-fieldset')->get('email')->getValue();
+		    	$dobFormValue = $registrationForm->get('user-fieldset')->get('dob')->getValue();
 		    	$addressCountryFormValue = $registrationForm->get('user-fieldset')->get('address')->get('address_country')->getValue();
+		    	$cat0FormValue = $registrationForm->get('user-fieldset')->get('categories')->get('0')->get('name')->getValue();
 		    	$role0FormValue = $registrationForm->get('user-fieldset')->get('roles')->get('0')->get('roleId')->getValue();//FIXME
 				
 				//set data
@@ -61,12 +66,17 @@ class TestController extends AbstractActionController {
 		            'user-fieldset' => [
 		                'email' => "Test$i@test.com",
 		                'password' => 'Password123',
+		                'dob' => '2015-08-15T00:00:00+0000',
+		                'categories' => [
+		                    ['name' => 'Cat1'],
+		                    ['name' => 'Cat2'],
+		                ],		                
 		                'address' => [
 		                	'address_country' => "Country$i",
 		                	'address_locality' =>	"Locality$i",
 		                ],
 		                'roles' => [
-		                    ['role_id' => 'Guest'],
+		                    ['role_id' => 'Guest'],//FIXME
 		                    ['role_id' => 'User'],
 		                ],		                
 		            ]
@@ -76,6 +86,10 @@ class TestController extends AbstractActionController {
 	    			'user-fieldset' => [ //base fieldset
 						'email',
 	    				'password',
+		    			'dob',
+		    			'categories' => [ //collection fieldset item fields
+							'name'
+				    	],
 		                'address' => [ //nested fieldset
 		                	'address_country',
 		                	'address_locality',
