@@ -4,6 +4,7 @@ namespace Application\Form\FieldSet;
 use Application\Model\Object\Address\AddressObject;
 use Zend\Form\Element;
 use Zend\Form\Fieldset;
+use Zend\InputFilter\InputFilterProviderInterface;
 
 /**
  * Class AddressFieldSet
@@ -11,7 +12,7 @@ use Zend\Form\Fieldset;
  *
  * @package Application\Form\FieldSet
  */
-class AddressFieldSet extends Fieldset
+class AddressFieldSet extends Fieldset implements InputFilterProviderInterface
 {
     const NAME = 'address';
 
@@ -98,4 +99,29 @@ class AddressFieldSet extends Fieldset
         $this->add($elementText);
         return $this;
     }
+    
+     /**
+      * @return array
+      */
+     public function getInputFilterSpecification()
+     {
+         return array(
+             'address_country' => array(
+                 'required' => false,
+             ),
+             'address_locality' => array(
+                 'required' => false,
+             ), 
+             'address_region' => array(
+                 'required' => false,
+             ),
+             'street_address' => array(
+                 'required' => false,
+             ),
+             'postal_code' => array(
+                 'required' => false,
+             ),         		          		          		        		
+         );
+     }    
+    
 }

@@ -46,14 +46,20 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
 
         // Add element
         $this->addInputPrivacy();
-
-        // Set InputFilter
-        $this->initInputFilter();
         
         //Set ValidationGroup
         $this->initValidationGroup();
     }
 
+    public function prepare()
+    {
+    	//Marshalls the input filter (defaults)
+    	$form = parent::prepare();
+        // Set InputFilter
+        $this->initInputFilter(); 
+        return $form;   	
+    }
+    
     /**
      * @return self
      */

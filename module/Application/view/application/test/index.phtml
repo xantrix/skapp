@@ -19,3 +19,18 @@ use Zend\Debug\Debug;
         </ul>
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Form</h1>
+    </div>
+    <div class="col-xs-12">
+    <?php $this->registrationForm->add(array(
+             'name' => 'submit',
+             'attributes' => array(
+                 'type' => 'submit',
+                 'value' => 'Submit',
+             ),
+         ))?>
+	<?php echo $this->form($this->registrationForm) ?>	
+    </div>
+</div>

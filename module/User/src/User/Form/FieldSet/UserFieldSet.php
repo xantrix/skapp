@@ -205,13 +205,19 @@ class UserFieldSet extends Fieldset
      */
     public function addInputCategories()
     {
-        $collectionRole = new Element\Collection('categories');
-        $collectionRole->setCount(2)
-            ->setAllowAdd(true)
-            ->setShouldCreateTemplate(true)
-            ->setTargetElement(new CategoryFieldSet());
-
-        $this->add($collectionRole);
+        $this->add(array(
+            'type' => 'Zend\Form\Element\Collection',
+            'name' => 'categories',
+            'options' => array(
+                'label' => 'Please choose cat for this',
+                'count' => 1,
+                'should_create_template' => true,
+                'allow_add' => true,
+                'target_element' => array(
+                    'type' => 'Application\Form\FieldSet\CategoryFieldSet',
+                ),
+            ),
+        ));        
         return $this;
     }     
     

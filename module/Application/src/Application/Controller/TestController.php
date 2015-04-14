@@ -29,10 +29,13 @@ class TestController extends AbstractActionController {
 	public function indexAction()
     {
     	$this->userModel = $this->model()->get('User\Model\UserModel');
-
+        /* @var $registrationForm \User\Form\RegistrationForm */
+    	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');    	
+    	
     	//create test list
     	if(true || $this->userModel->getDataGateway()->count() == 0){
 	    	for ($i = 0; $i < 3; $i++) {
+	    		$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');//reset form each time
 	    		$this->user = $this->userModel->create();//new empty
 	    		$this->user->setEmail("test$i@test.com");
 		    	$this->user->setPassword('password123');
@@ -49,12 +52,9 @@ class TestController extends AbstractActionController {
 		    	$this->user->setDateCreated(new \DateTime('now'));
 		    	$this->user->setDob(new \DateTime('now'));
 		    	
-        		/* @var $registrationForm \User\Form\RegistrationForm */
-    			$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');		    	
 		    	$registrationForm->bind($this->user);
 		    	
 		    	//form is populated with bound object values.
-		    	$registrationForm->prepare();
 		    	$emailFormValue = $registrationForm->get('user-fieldset')->get('email')->getValue();
 		    	$dobFormValue = $registrationForm->get('user-fieldset')->get('dob')->getValue();
 		    	$addressCountryFormValue = $registrationForm->get('user-fieldset')->get('address')->get('address_country')->getValue();
@@ -82,6 +82,8 @@ class TestController extends AbstractActionController {
 		            ]
 		        ];		    	
 		    	$registrationForm->setData($prg);
+		    	$registrationForm->prepare();//filter creation
+
 		    	$registrationForm->setValidationGroup([
 	    			'user-fieldset' => [ //base fieldset
 						'email',
@@ -96,9 +98,9 @@ class TestController extends AbstractActionController {
 		                	'postal_code',
 		                	'street_address'	
 		                ],
-		                /*'roles' => [ //collection fieldset item fields
+		                'roles' => [ //collection fieldset item fields
 		                    'role_id'
-		                ]*/		    			
+		                ]		    			
 	    			]
     			]);
 		    	
@@ -143,7 +145,8 @@ class TestController extends AbstractActionController {
 		$users->count();*/
 		
         return new ViewModel([
-			'users' => $paginator
+			'users' => $paginator,
+        	'registrationForm' => $registrationForm
         ]);
     }	
 }
