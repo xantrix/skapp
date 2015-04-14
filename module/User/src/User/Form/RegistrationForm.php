@@ -60,6 +60,15 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
         return $form;   	
     }
     
+    public function isValid()
+    {
+    	if(!$this->isPrepared)
+    	{
+    		$this->prepare();
+    	}
+    	return parent::isValid();
+    }
+    
     /**
      * @return self
      */

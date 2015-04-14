@@ -82,7 +82,7 @@ class TestController extends AbstractActionController {
 		            ]
 		        ];		    	
 		    	$registrationForm->setData($prg);
-		    	$registrationForm->prepare();//filter creation
+		    	//$registrationForm->prepare();//filter creation
 
 		    	$registrationForm->setValidationGroup([
 	    			'user-fieldset' => [ //base fieldset
