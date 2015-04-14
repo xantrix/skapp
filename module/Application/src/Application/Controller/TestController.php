@@ -20,15 +20,26 @@ class TestController extends AbstractActionController {
 	 * @var \User\Model\UserModel
 	 */
 	protected $userModel;
-
+	
+	/**
+	 * @var \Application\Model\ItemModel
+	 */
+	protected $itemModel;
+	
 	/**
 	 * @var \User\Model\Entity\UserEntity
 	 */
 	protected $user;    
 	
+	/**
+	 * @var \Application\Model\Entity\ItemEntity
+	 */	
+	protected $item;
+	
 	public function indexAction()
     {
     	$this->userModel = $this->model()->get('User\Model\UserModel');
+    	$this->itemModel = $this->model()->get('Application\Model\ItemModel');
         /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');    	
     	
@@ -107,6 +118,12 @@ class TestController extends AbstractActionController {
 		    	//valid and save
 		    	if($registrationForm->isValid()){
 			    	$this->user->save();
+			    	
+			    	$this->item = $this->itemModel->create();
+			    	$this->item->setName("item-user-$i");
+			    	$this->item->setUserId($this->user->getId());
+			    	$this->item->save();
+			    	
 		    	}else{
 		    		$errors = $registrationForm->getMessages();
 		    	}
@@ -114,7 +131,7 @@ class TestController extends AbstractActionController {
     	}
 
     	/* @var $user  \User\Model\Entity\UserEntity */
-    	$user = $this->userModel->findByIdentity('test0@test.com')->current();//get from persistence
+    	$user = $this->userModel->findByIdentity('Test0@test.com')->current();//get from persistence
     	if($user) 
     		$user->getDateCreated(); //php DateTime
 
@@ -130,6 +147,7 @@ class TestController extends AbstractActionController {
 		$page = (int) $this->params()->fromQuery('page');
 		if($page) $paginator->setCurrentPageNumber($page);
     	
+		$items = $this->itemModel->getItemsByUser($user->getId());//$items->toArray();
     	//find all users with CallbackCriteria
 		/*$users = $this->userModel->find(
 		    new \Matryoshka\Model\Criteria\CallbackCriteria(
@@ -146,6 +164,7 @@ class TestController extends AbstractActionController {
 		
         return new ViewModel([
 			'users' => $paginator,
+        	'items' => $items,	
         	'registrationForm' => $registrationForm
         ]);
     }	

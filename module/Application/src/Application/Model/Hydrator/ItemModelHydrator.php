@@ -3,6 +3,7 @@ namespace Application\Model\Hydrator;
 
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\ClassMethods;
 use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoDateStrategy;
+use Matryoshka\Model\Wrapper\Mongo\Hydrator\Strategy\MongoIdStrategy;
 
 /**
  * Class ItemModelHydrator
@@ -23,6 +24,9 @@ class ItemModelHydrator extends ClassMethods
         // Convert DateTime to MongoDate and vice versa
         $this->addStrategy('date_created', new MongoDateStrategy());
         $this->addStrategy('date_modified', new MongoDateStrategy());
+        
+        //save as mongo objectId
+        $this->addStrategy('user_id', new MongoIdStrategy());
         
     }	
 }

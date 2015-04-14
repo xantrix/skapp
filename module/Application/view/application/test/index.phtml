@@ -1,4 +1,6 @@
-<?php /* @var $user \User\Model\Entity\UserEntity */ 
+<?php 
+/* @var $user \User\Model\Entity\UserEntity */ 
+/* @var $item \Application\Model\Entity\ItemEntity */
 use Zend\Debug\Debug;
 ?>
 
@@ -16,6 +18,20 @@ use Zend\Debug\Debug;
           </li>
         <?php endforeach;?>
         <?php echo $this->paginationControl($this->users, 'Sliding', 'pagination/default'); ?>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Items for user</h1>
+    </div>
+    <div class="col-xs-12">
+        <ul class="fa-ul">
+        <?php foreach ($this->items as $item) :?>
+          <li><i class="fa-li fa fa-square"></i>
+          <?= $item->getId()?> - <?= $item->getUserId()?> - <?= $user->getDateCreated()->format(DateTime::ISO8601)?>
+          </li>
+        <?php endforeach;?>
         </ul>
     </div>
 </div>

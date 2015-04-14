@@ -4,8 +4,9 @@ namespace Application\Model\Entity;
 use Application\Model\AbstractEntity;
 use Application\Model\DateAwareTrait;
 use User\Model\Entity\UserEntity;
+use Application\Model\DateAwareInterface;
 
-class ItemEntity extends AbstractEntity implements ItemInterface 
+class ItemEntity extends AbstractEntity implements ItemInterface, DateAwareInterface 
 {
 	use DateAwareTrait;
 	
@@ -20,10 +21,24 @@ class ItemEntity extends AbstractEntity implements ItemInterface
     protected $name;    
     
     /**
-     * @var User
+     * @var string
      */
-    protected $user;    
+    protected $userId;    
     
+	/**
+	 * @return the $userId
+	 */
+	public function getUserId() {
+		return $this->userId;
+	}
+
+	/**
+	 * @param string $userId
+	 */
+	public function setUserId($userId) {
+		$this->userId = $userId;
+	}
+
 	/**
 	 * @return the $name
 	 */
@@ -56,14 +71,7 @@ class ItemEntity extends AbstractEntity implements ItemInterface
 	 * @return UserEntity
 	 */
 	public function getUser() {
-		return $this->user;
-	}
-
-	/**
-	 * @param UserEntity $user
-	 */
-	public function setUser($user) {
-		$this->user = $user;
+		//return $this->user;
 	}
 	
 }
