@@ -6,6 +6,7 @@ use Zend\Crypt\Password\Bcrypt;
 use Application\Model\DateAwareTrait;
 use AuthModule\Identity\ObjectInterface as AuthObjectInterface;
 use Application\Model\Object\Address\AddressObject;
+use ArrayObject;
 use User\Model\Object\Role\Collection\RoleCollection;
 use User\Model\Object\Role\RoleObject;
 use User\Model\Object\Role\RoleInterface;
@@ -86,6 +87,10 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	 */
 	protected $categories;
 	
+	public function __construct() { 
+		$this->categories = new ArrayObject();
+		$this->roles = new RoleCollection(); 
+	}
 	/**
 	 * @return the $dob
 	 */
@@ -122,7 +127,7 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	}
 
 	/**
-	 * @param multitype: $categories
+	 * @param array $categories
 	 */
 	public function setCategories($categories) {
 		$this->categories = $categories;
