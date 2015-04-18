@@ -36,7 +36,7 @@ class UserFieldSet extends Fieldset
     {
         // Config
         parent::__construct(self::NAME);
-        $this->setObject(new UserEntity());
+        //$this->setObject(new UserEntity());
         $this->setUseAsBaseFieldset(true);
         // Add element
         $this

@@ -7,10 +7,13 @@ use User\Model\Criteria\UserCollectionCriteria;
 use Application\Model\Object\Address\AddressObject;
 use Application\Model\Object\Category\CategoryObject;
 use Application\Model\Traits\PaginatorTrait;
+use Application\Model\Util;
 use MongoDate;
 use User\Model\Object\Role\RoleObject;
 use User\Model\Object\Role\Collection\RoleCollection;
 use User\Model\Entity\UserEntity;
+use Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria;
+
 
 class TestController extends AbstractActionController {
 
@@ -42,7 +45,7 @@ class TestController extends AbstractActionController {
     	$this->itemModel = $this->model()->get('Application\Model\ItemModel');
         /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');    	
-    	
+
     	//create test list
     	if(true || $this->userModel->getDataGateway()->count() == 0){
 	    	for ($i = 0; $i < 3; $i++) {
@@ -134,7 +137,10 @@ class TestController extends AbstractActionController {
     	$user = $this->userModel->findByIdentity('Test0@test.com')->current();//get from persistence
     	if($user) 
     		$user->getDateCreated(); //php DateTime
-
+    	$base64 = Util::hexToBase64UrlSafe($user->getId());
+    	$mongoIdString = Util::base64UrlSafeToHex($base64);
+    	$user = $this->userModel->find((new ActiveRecordCriteria())->setId($mongoIdString))->current();;
+    	
 		$from = '2015-02-20T00:00:00+0000';
 		$to = '2015-05-01T00:00:00+0000';
     	
