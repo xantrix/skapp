@@ -1,14 +1,13 @@
 <?php
 namespace User\Model;
 
-use Matryoshka\Model\Model;
 use AuthModule\Identity\ModelInterface as AuthModelInterface;
 use User\Model\Criteria\UserCollectionCriteria;
 use Matryoshka\Model\ObservableModel;
 
 class UserModel extends ObservableModel implements AuthModelInterface
 {
-
+	
     /**
      * {@inheritdoc}
      */
@@ -27,5 +26,14 @@ class UserModel extends ObservableModel implements AuthModelInterface
     {
     	return $this->find((new UserCollectionCriteria())->setCreatedDateFrom($from)->setCreatedDateTo($to));
     }
-
+    
+	/**
+	 * @param string $userId
+	 * @return ResultSetInterface
+	 */    
+    public function findItemsByUser($userId)
+    {
+    	$itemModel = $this->getServiceLocator()->get('Application\Model\ItemModel');
+    	return $itemModel->findItemsByUser($userId);
+    }
 }

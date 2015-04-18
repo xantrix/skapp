@@ -147,7 +147,8 @@ class TestController extends AbstractActionController {
 		$page = (int) $this->params()->fromQuery('page');
 		if($page) $paginator->setCurrentPageNumber($page);
     	
-		$items = $this->itemModel->getItemsByUser($user->getId());//$items->toArray();
+		$items = $this->itemModel->findItemsByUser($user->getId());//$items->toArray();
+		$items = $user->findItems();//doctrine style
     	//find all users with CallbackCriteria
 		/*$users = $this->userModel->find(
 		    new \Matryoshka\Model\Criteria\CallbackCriteria(

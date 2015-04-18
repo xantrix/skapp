@@ -353,4 +353,13 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
         $bCrypt->setCost(UserInterface::BCRYPT_COST);
         return $bCrypt->verify($credential, $this->passwordCrypt);
     }
+    
+	/**
+	 * @return ResultSetInterface
+	 */    
+    public function findItems()
+    {
+    	return $this->getModel()->findItemsByUser($this->getId());
+    }
+    
 }

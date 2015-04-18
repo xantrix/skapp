@@ -11,7 +11,7 @@ class ItemModel extends ObservableModel
 	 * @param string $userId
 	 * @return ResultSetInterface
 	 */
-	public function getItemsByUser($userId)
+	public function findItemsByUser($userId)
 	{
 		return $this->find((new ItemCollectionCriteria())->setUserId($userId));
 	}
