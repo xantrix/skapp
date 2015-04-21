@@ -64,9 +64,12 @@ return [
 		                ],
 		            ],
 		            'profile'        => [
-		                'type'    => 'Zend\Mvc\Router\Http\Literal',
+		                'type'    => 'Segment',
 		                'options' => [
-		                    'route'    => '/profile',
+		                    'route'    => '/profile/:id',
+                            'constraints' => [
+                                'id'     => '[a-zA-Z0-9_-]*'
+                            ],		                    
 		                    'defaults' => [
 		                        'action'     => 'profile',
 		                    ],

@@ -8,6 +8,6 @@ return [
 
     ],
     'invokables' => [
-
+		
 	]
 ];

@@ -105,6 +105,11 @@ class Module implements ViewHelperProviderInterface
         return include __DIR__ . '/config/viewhelper.config.php';
     }
 
+    public function getControllerPluginConfig()
+    {
+    	return include __DIR__ . '/config/controllerplugin.config.php';
+    }
+    
     public function getAutoloaderConfig()
     {
         return [

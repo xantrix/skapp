@@ -36,8 +36,13 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                         <?php if($this->identity()) :?>
+                        <?php 
+                        $sm = $this->getHelperPluginManager()->getServiceLocator();
+                        $user = $sm->get('AuthModule\AuthenticationService')->getIdentityObject(); ?>
                         <li class="active"><a href="<?php echo $this->url('user-home') ?>"><?php echo $this->translate('User Home') ?></a></li>
-                        <li class="active"><a href="<?php echo $this->url('user/profile') ?>"><?php echo $this->translate('Profile') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('user/profile',['id' =>$this->id2Short($user->getId())]) ?>">
+                        	<?php echo $this->translate('Profile') ?></a>
+                        </li>
                         <li class="active"><a href="<?php echo $this->url('user/logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                         <?php else :?>
                         <li class="active"><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>

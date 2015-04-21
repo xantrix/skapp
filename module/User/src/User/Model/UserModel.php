@@ -3,6 +3,7 @@ namespace User\Model;
 
 use AuthModule\Identity\ModelInterface as AuthModelInterface;
 use User\Model\Criteria\UserCollectionCriteria;
+use Matryoshka\Model\Wrapper\Mongo\Criteria\ActiveRecord\ActiveRecordCriteria;
 use Matryoshka\Model\ObservableModel;
 
 class UserModel extends ObservableModel implements AuthModelInterface
@@ -16,6 +17,14 @@ class UserModel extends ObservableModel implements AuthModelInterface
         return $this->find((new UserCollectionCriteria())->setEmail($identity));
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findById($id)
+    {
+        return $this->find((new ActiveRecordCriteria())->setId($id));
+    }    
+    
     /**
      * 
      * @param string $from

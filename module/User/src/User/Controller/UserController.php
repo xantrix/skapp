@@ -4,9 +4,12 @@ namespace User\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
+use User\Model\Entity\UserEntity;
+use Zend\Mvc\MvcEvent;
 
 /**
  * @method \AuthModule\Controller\Plugin\InteractiveAuth interactiveAuth()
+ * @method \Application\Controller\Plugin\MongoIdShort mongoIdShort()
  */
 class UserController extends AbstractActionController
 {
@@ -21,11 +24,12 @@ class UserController extends AbstractActionController
 	 */
 	protected $userModel;
 
-	/**
-	 * @var \User\Model\Entity\UserEntity
-	 */
-	protected $user;
-
+	public function onDispatch(MvcEvent $e)
+	{
+		$this->userModel = $this->model()->get('User\Model\UserModel');
+		return parent::onDispatch($e);
+	}
+	
 	public function indexAction()
 	{
 		return true;
@@ -39,12 +43,13 @@ class UserController extends AbstractActionController
             return $prg;
         }
 
-        // post login redirect url
-        $next = $this->params()->fromQuery('next', $this->url()->fromRoute(
-            $this->profileRouteName
-        ));
-
         if ($this->identity()) {
+	        // post login redirect url
+	        /* @var $user UserEntity  */
+	        $user = $this->interactiveAuth()->getAuthenticationService()->getIdentityObject();
+	        $next = $this->params()->fromQuery('next', $this->url()->fromRoute(
+	            $this->profileRouteName,['id' =>$this->id2Short($user->getId())]
+	        ));         	
             //User logged in already.
             return $this->redirect()->toUrl($next);
         }
@@ -61,6 +66,12 @@ class UserController extends AbstractActionController
                 );
 
                 if ($result->isValid()) {
+			        // post login redirect url
+	        		/* @var $user UserEntity  */
+	        		$user = $this->interactiveAuth()->getAuthenticationService()->getIdentityObject();			        
+			        $next = $this->params()->fromQuery('next', $this->url()->fromRoute(
+			            $this->profileRouteName,['id' =>$this->id2Short($user->getId())]
+			        ));                	
                     //OK! User logged in successfully
                     return $this->redirect()->toUrl($next);
                 }
@@ -90,7 +101,7 @@ class UserController extends AbstractActionController
         /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');
     	/* @var $user \User\Model\EntityUserEntity */
-    	$user = $this->userModel = $this->model()->get('User\Model\UserModel')->create();
+    	$user = $this->userModel->create();
     	$registrationForm->bind($user);
 
     	if (is_array($prg)) {
@@ -131,7 +142,17 @@ class UserController extends AbstractActionController
 
     public function profileAction()
     {
-    	return new ViewModel();
+    	$id = $this->id2Normal($this->params()->fromRoute('id'));
+    	
+    	/* @var $user  \User\Model\Entity\UserEntity */
+    	$user = $this->userModel->findById($id)->current();    	
+    	
+    	if(!$user)
+    		throw new \Exception('User not found!');
+    	
+    	return new ViewModel([
+           'user' => $user 
+    	]);
     }
 
     public function profileEditAction()

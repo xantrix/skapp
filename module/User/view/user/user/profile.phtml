@@ -1,1 +1,16 @@
-profile
+<?php 
+/* @var $user \User\Model\Entity\UserEntity */ 
+$short = $this->id2Short($user->getId());
+?>
+<section id="profile">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
+			<?=$user->getId()?><br/>
+			(<?=$this->id2Normal($short)?>) 
+			<?=$user->getEmail()?>
+			</div>
+			<?=$this->partial('user/partials/sidebar/sidebar.phtml')?>			
+		</div>
+	</div>
+</section>

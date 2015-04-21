@@ -18,7 +18,9 @@
         "matryoshka-model/zf2-matryoshka-module": "~0.6",
         "matryoshka-model/mongo-wrapper": "~0.6",
 		"matryoshka-model/rest-wrapper": "~0.6",
-        "zfcampus/zf-development-mode": "2.*"
+        "zfcampus/zf-development-mode": "2.*",
+        "ripaclub/imgman": "0.4.*",
+        "bjyoungblood/bjy-authorize": "~1.4"
     },
     "scripts": {
         "post-install-cmd": [
