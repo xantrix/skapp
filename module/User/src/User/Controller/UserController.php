@@ -105,6 +105,7 @@ class UserController extends AbstractActionController
     	$registrationForm->bind($user);
 
     	if (is_array($prg)) {
+    		
     	    $registrationForm->setData($prg);
     	    if ($registrationForm->isValid()) {
                 $user->save();

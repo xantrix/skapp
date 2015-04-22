@@ -4,11 +4,23 @@ namespace User\Model\Criteria;
 use Matryoshka\Model\Wrapper\Mongo\Criteria\FindAllCriteria;
 use DateTime;
 use MongoDate;
+use MongoId;
 
 class UserCollectionCriteria extends FindAllCriteria
 {
     
-    public function getEmail()
+    public function setExcludeId($id)
+    {
+        $this->selectionCriteria['_id']['$ne'] = new MongoId($id);
+        return $this; 
+    }
+	
+    public function getExcludeId()
+    {
+    	return isset($this->selectionCriteria['_id']['$ne']) ? $this->selectionCriteria['_id']['$ne'] : null;
+    }
+    
+	public function getEmail()
     {
         return isset($this->selectionCriteria['email']) ? $this->selectionCriteria['email'] : null;
     }    

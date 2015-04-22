@@ -96,6 +96,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
                 $input->setRequired(true);
                 //add identity exists (email) validator: NoIdentityExistsFactory-> new NoIdentityExists, setCriteria,setModel, findIdentity
                 $noIdentityValidator = $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
+                //$noIdentityValidator->setExcludeField('id');
                 $input->getValidatorChain()->attach($noIdentityValidator);
             }
 
@@ -134,6 +135,7 @@ class RegistrationForm extends Form implements ServiceLocatorAwareInterface
     {
     	$this->setValidationGroup([
     			'user-fieldset' => [
+    				//'id'
 					'email',
     				'password',
     				'password_re'

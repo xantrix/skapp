@@ -16,6 +16,7 @@ class UserFieldSet extends Fieldset
 {
     const NAME = 'user-fieldset';
 
+    const INPUT_NAME_ID         = 'id';
     const INPUT_NAME_EMAIL         = 'email';
     const INPUT_NAME_USERNAME      = 'user_name';
     const INPUT_NAME_PASSWORD      = 'password';
@@ -40,6 +41,7 @@ class UserFieldSet extends Fieldset
         $this->setUseAsBaseFieldset(true);
         // Add element
         $this
+        	->addInputId()
             ->addInputGender()
             ->addInputDob()
             ->addInputCategories() //CategoryFieldSet
@@ -57,6 +59,17 @@ class UserFieldSet extends Fieldset
         ;
     }
 
+    /**
+     * @return $this
+     */
+    public function addInputId()
+    {
+        $element = new Element\Text(self::INPUT_NAME_ID);
+        $this->add($element);
+
+        return $this;
+    }    
+    
     /**
      * @return $this
      */

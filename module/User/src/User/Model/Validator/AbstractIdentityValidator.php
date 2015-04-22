@@ -36,8 +36,25 @@ abstract class AbstractIdentityValidator extends AbstractValidator
      */
     protected $identityField = 'email';
 
+    protected $excludePrefix = 'exclude';
+    
+    protected $excludeField = '';
 
-    public function setCriteria(ReadableCriteriaInterface $criteria)
+    /**
+	 * @return the $excludeField
+	 */
+	public function getExcludeField() {
+		return $this->excludeField;
+	}
+
+	/**
+	 * @param string $excludeField
+	 */
+	public function setExcludeField($excludeField) {
+		$this->excludeField = $excludeField;
+	}
+
+	public function setCriteria(ReadableCriteriaInterface $criteria)
     {
         $this->criteria = $criteria;
         return $this;
@@ -49,12 +66,16 @@ abstract class AbstractIdentityValidator extends AbstractValidator
         return $this;
     }
 
-    public function findIdentity($identity)
+    public function findIdentity($identity, $context = null)
     {
         $hydrator = new ClassMethods();
         $data = [
             $this->identityField => $identity
         ];
+        if($this->excludeField){
+        	$data[ $this->excludePrefix . $this->excludeField ] = $context[$this->excludeField];
+        }
+        
         $criteria = clone $this->criteria;
         $hydrator->hydrate($data, $criteria);
         return $this->model->find($criteria)->current();
