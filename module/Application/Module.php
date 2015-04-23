@@ -97,6 +97,7 @@ class Module implements ViewHelperProviderInterface
         $config = include __DIR__ . '/config/module.config.php';
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/route.config.php');
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/model.config.php');
+        $config = ArrayUtils::merge($config, include __DIR__ . '/config/imgman.config.php');
         return $config;
     }
 

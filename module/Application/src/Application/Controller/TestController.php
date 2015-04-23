@@ -45,7 +45,23 @@ class TestController extends AbstractActionController {
     	$this->itemModel = $this->model()->get('Application\Model\ItemModel');
         /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');    	
-
+		
+    	//imgMan test
+    	$imgMan = $this->getServiceLocator()->get('ImgMan\Service\Default');
+    	$request = $this->getRequest();
+        $post = array_replace_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()            
+         ); 
+        if(isset($post['path']['tmp_name'])){    	
+	 		$image = new \ImgMan\Image\Image($post['path']['tmp_name']);
+	 		$imgMan->grab($image, '/'.$post['path']['name']);    	
+	            
+			$imageOriginal = $imgMan->get('/'.$post['path']['name'], 'original');
+			$imageThumb = $imgMan->get('/'.$post['path']['name'], 'thumb');
+			$imageThumbMaxi = $imgMan->get('/'.$post['path']['name'], 'thumbmaxi');
+        }            
+            
     	//create test list
     	if(true || $this->userModel->getDataGateway()->count() == 0){
 	    	for ($i = 0; $i < 3; $i++) {
@@ -172,7 +188,7 @@ class TestController extends AbstractActionController {
         return new ViewModel([
 			'users' => $paginator,
         	'items' => $items,	
-        	'registrationForm' => $registrationForm
+        	'registrationForm' => $registrationForm,
         ]);
     }	
 }

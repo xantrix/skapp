@@ -2,6 +2,7 @@
 /* @var $user \User\Model\Entity\UserEntity */ 
 /* @var $item \Application\Model\Entity\ItemEntity */
 use Zend\Debug\Debug;
+$this->registrationForm->setAttribute('action', '');
 ?>
 
 <div class="row">
@@ -41,6 +42,13 @@ use Zend\Debug\Debug;
     </div>
     <div class="col-xs-12">
     <?php $this->registrationForm->add(array(
+            'name' => 'path',
+            'type' => 'file',
+            'options' => array(
+                'label' => 'Photo',
+            ),
+        ));?>    
+    <?php $this->registrationForm->add(array(
              'name' => 'submit',
              'attributes' => array(
                  'type' => 'submit',
@@ -49,4 +57,12 @@ use Zend\Debug\Debug;
          ))?>
 	<?php echo $this->form($this->registrationForm) ?>	
     </div>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+	<img alt="" src="/images?i=/funny-baby-evil-plan-face.jpg&r=original" />
+	<img alt="" src="/images?i=/funny-baby-evil-plan-face.jpg&r=thumbmaxi" />
+	<img alt="" src="/images?i=/funny-baby-evil-plan-face.jpg&r=thumb" />
+	<img alt="" src="/images?i=missing&r=original" />
+	</div>
 </div>

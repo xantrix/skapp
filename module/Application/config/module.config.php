@@ -48,6 +48,7 @@ return [
     'controllers'           => [
         'invokables' => [
             'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\ImageManager' => 'Application\Controller\ImageManagerController', 
 			'Application\Controller\Test' => 'Application\Controller\TestController'            		
         ],
     ],
