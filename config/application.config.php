@@ -7,7 +7,8 @@
  */
 return array(
     'modules' => array(
-    	'ZF\DevelopmentMode',	
+    	'ZF\DevelopmentMode',
+   		'BjyAuthorize',	
         'AsseticBundle',
         'HangerSnippet',
         'Matryoshka',

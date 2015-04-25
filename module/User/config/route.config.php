@@ -44,16 +44,6 @@ return [
                 ],
                 'may_terminate' => false,
                 'child_routes'  => [
-                    'default' => [
-                        'type'    => 'Segment',
-                        'options' => [
-                            'route'       => '[/:action]',
-                            'constraints' => [
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
-                            ],
-                            'defaults'    => [],
-                        ],
-                    ],
 		            'recover-password'        => [
 		                'type'    => 'Zend\Mvc\Router\Http\Literal',
 		                'options' => [
@@ -89,21 +79,8 @@ return [
 		                'options'       => [
 		                    'route'    => '/admin',
 		                    'defaults' => [
-		                        'controller'    => 'Admin',
-		                        'action'        => 'index',
-		                    ],
-		                ],
-		                'may_terminate' => false,
-		                'child_routes'  => [
-		                    'default' => [
-		                        'type'    => 'Segment',
-		                        'options' => [
-		                            'route'       => '[/:action]',
-		                            'constraints' => [
-		                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*'
-		                            ],
-		                            'defaults'    => [],
-		                        ],
+		                        'controller'    => 'User',
+		                        'action'        => 'admin-only',
 		                    ],
 		                ],
 		            ],//admin		                                

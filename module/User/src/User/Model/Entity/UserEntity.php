@@ -89,7 +89,7 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	
 	public function __construct() { 
 		$this->categories = new ArrayObject();
-		$this->roles = new RoleCollection(); 
+		$this->roles = new RoleCollection([ new RoleObject('user')]); 
 	}
 	/**
 	 * @return the $dob

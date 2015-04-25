@@ -6,6 +6,7 @@ return [
     'service_manager'   => [
         'factories' => [
             'User\Authentication\AuthModelAdapter' => 'User\Authentication\AuthModelAdapterFactory',
+            'BjyAuthorize\Provider\Identity\AuthenticationIdentityProvider' => 'User\Model\Service\AuthenticationIdentityProviderServiceFactory'            
         ],
     ],
     'controllers'           => [

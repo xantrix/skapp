@@ -3,6 +3,7 @@ namespace User\Model\Entity;
 
 use Matryoshka\Model\Object\IdentityAwareInterface;
 use Zend\Permissions\Acl\Role\RoleInterface;
+use BjyAuthorize\Provider\Role\ProviderInterface as RoleProviderInterface;
 use Application\Model\DateAwareInterface;
 
 /**
@@ -12,7 +13,7 @@ use Application\Model\DateAwareInterface;
  * All users who can log in to the system must implement this interface.
  *
  */
-interface UserInterface extends IdentityAwareInterface, /*RoleInterface,*/ DateAwareInterface
+interface UserInterface extends IdentityAwareInterface, /*RoleInterface,*/ RoleProviderInterface, DateAwareInterface
 {
 
     const ROLE_USER = 'user';

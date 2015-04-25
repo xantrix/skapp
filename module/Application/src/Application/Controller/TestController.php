@@ -76,7 +76,7 @@ class TestController extends AbstractActionController {
 		    	$mainAddress->setAddressLocality("locality$i");
 		    	$this->user->setAddress($mainAddress);
 		    	//set collection fields
-		    	$this->user->setRoles(new RoleCollection([ new RoleObject('guest'),  new RoleObject('user')]));
+		    	$this->user->setRoles(new RoleCollection([ new RoleObject('b2c'),  new RoleObject('user')]));
 		    	$this->user->setCategories([ new CategoryObject('cat1'),  new CategoryObject('cat2')]);
 		    	//set dates
 		    	$this->user->setDateCreated(new \DateTime('now'));
@@ -106,8 +106,8 @@ class TestController extends AbstractActionController {
 		                	'address_locality' =>	"Locality$i",
 		                ],
 		                'roles' => [
-		                    ['role_id' => 'Guest'],
-		                    ['role_id' => 'User'],
+		                    ['role_id' => 'b2c'],
+		                    ['role_id' => 'user'],
 		                ],		                
 		            ]
 		        ];		    	
