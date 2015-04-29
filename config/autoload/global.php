@@ -55,4 +55,17 @@ return [
             'database' => 'skapp' //yourdatabase
         ],
     ],
+    //mailMan
+	'mailman' => [
+	    'MailMan\Mandrill' => [
+	        'default_sender' => 'test@mail.com',
+	        'transport' => [
+	            'type' => 'mandrill',
+	            'options' => [
+	                'api_key' => 'MYSECRETMANDRILLKEY',
+	                'sub_account' => 'my-optional-subaccount-if-any'
+	            ],
+	        ],
+	    ],
+	]    
 ];

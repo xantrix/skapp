@@ -20,7 +20,9 @@
 		"matryoshka-model/rest-wrapper": "~0.6",
         "zfcampus/zf-development-mode": "2.*",
         "ripaclub/imgman": "0.4.*",
-        "bjyoungblood/bjy-authorize": "~1.4"
+        "bjyoungblood/bjy-authorize": "~1.4",
+        "ripaclub/zf2-mailman": "0.2.*",
+        "mandrill/mandrill": "~1.0"
     },
     "scripts": {
         "post-install-cmd": [

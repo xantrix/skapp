@@ -13,6 +13,7 @@ return array(
         'HangerSnippet',
         'Matryoshka',
         'SphinxSearch',
+    	'MailMan',	
         'Application',
         'AuthModule',
         'User'

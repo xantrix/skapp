@@ -46,6 +46,16 @@ class TestController extends AbstractActionController {
         /* @var $registrationForm \User\Form\RegistrationForm */
     	$registrationForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\RegistrationForm');    	
 		
+    	//mailMan test
+		/*$message = new \MailMan\Message();
+		$message->addTextPart('Test email');
+		$message->setSubject('My name is methos');
+		$message->addFrom('test@test.com', 'Methos');
+		$message->addTo('test@test.com', 'test');*/
+		/** @var \MailMan\Service\MailService $mailService */
+		/*$mailService = $this->getServiceLocator()->get('MailMan\Mandrill');
+		$mailService->send($message);*/    	
+    	
     	//imgMan test
     	$imgMan = $this->getServiceLocator()->get('ImgMan\Service\Default');
     	$request = $this->getRequest();
