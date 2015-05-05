@@ -73,7 +73,7 @@ return [
         // in the ACL. like roles, they can be hierarchical
         'resource_providers' => [
             \BjyAuthorize\Provider\Resource\Config::class => [
-                'pants' => [],
+                //'User' => [],
             ],
         ],
 
@@ -88,7 +88,7 @@ return [
                 'allow' => [
                     // allow guests and users (and admins, through inheritance)
                     // the "wear" privilege on the resource "pants"
-                    [['guest', 'user'], 'pants', 'wear'],
+                    //[['guest', 'user'], 'pants', 'wear'],
                 ],
 
                 // Don't mix allow/deny rules if you are using role inheritance.
@@ -133,21 +133,29 @@ return [
             /* If this guard is specified here (i.e. it is enabled], it will block
              * access to all routes unless they are specified here.
              */
-            \BjyAuthorize\Guard\Route::class => [
+            /*\BjyAuthorize\Guard\Route::class => [
                 //Guest
                 ['route' => 'application/default', 'roles' => ['guest']],
-                ['route' => 'home', 'roles' => ['guest']],
-                ['route' => 'images', 'roles' => ['guest']],
-                ['route' => 'login', 'roles' => ['guest']],
-                ['route' => 'registration', 'roles' => ['guest']],
-                ['route' => 'user/recover-password', 'roles' => ['guest']],
-                ['route' => 'user/profile', 'roles' => ['guest']],
-                //User
-                ['route' => 'user/logout', 'roles' => ['user']],
-                ['route' => 'user/profile-edit', 'roles' => ['user']],
-                //Admin
-                ['route' => 'user/admin', 'roles' => ['admin']],
-            ],
+             ],*/
         ],
+        
+	    // cache options have to be compatible with Zend\Cache\StorageFactory::factory
+	    'cache_options' => [
+			'adapter' => [
+				'name' => 'memory', //filesystem, memory, mongodb
+				/*'options' => [ //filesystem
+					'cache_dir' => './data/cache'
+				]*/
+				/*'options' => [ //mongodb
+					'database' => 'skapp',
+					'collection' => 'bjyauthorize_acl'		
+				]*/
+			],
+			/*'plugins' => [
+				'serializer'
+			],*/
+	    ],
+	    'cache_key'             => 'bjyauthorize_acl'
+	            
     ],
 ];

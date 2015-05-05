@@ -25,6 +25,12 @@ return array(
         ),
         'config_glob_paths' => array(
             'config/autoload/{,*.}{global,local}.php'
-        )
+        ),
+        'config_cache_enabled' => false,
+        'config_cache_key' => 'module_config_cache',
+        'module_map_cache_enabled' => false,
+        'module_map_cache_key' => 'module_map_config_cache',
+        'cache_dir' => './data/cache',
+        'check_dependencies' => false,    		
     )
 );

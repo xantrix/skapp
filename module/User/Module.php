@@ -11,6 +11,17 @@ class Module implements ValidatorProviderInterface, ViewHelperProviderInterface
 
 	public function onBootstrap(MvcEvent $e)
     {
+    	$serviceManager      = $e->getApplication()->getServiceManager();
+    	$sharedManager = $e->getApplication()->getEventManager()->getSharedManager();
+    	//$eventManager = $e->getApplication()->getEventManager();        
+        
+    	//if cached in persistent storage, fill Assertion object after wakeup
+//     	$sharedManager->attach('User\Model\Assertion\CheckMyProfile', 'assert.pre', function($event) use ($serviceManager){
+// 			$target = $event->getTarget();
+//     		$loggedUser = $serviceManager->get('AuthModule\AuthenticationService')->getIdentityObject();
+//     		$target->setLoggedUser($loggedUser);
+//     		//$event->getParam('param1');
+//     	});    	
     }
 
 	public function getConfig()
@@ -19,6 +30,7 @@ class Module implements ValidatorProviderInterface, ViewHelperProviderInterface
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/route.config.php');
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/model.config.php');
         $config = ArrayUtils::merge($config, include __DIR__ . '/config/listener.config.php');
+        $config = ArrayUtils::merge($config, include __DIR__ . '/config/bjyauthorize.config.php');
         return $config;
     }
 

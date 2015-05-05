@@ -6,6 +6,7 @@ use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 use User\Model\Entity\UserEntity;
 use Zend\Mvc\MvcEvent;
+use BjyAuthorize\Exception\UnAuthorizedException;
 
 /**
  * @method \AuthModule\Controller\Plugin\InteractiveAuth interactiveAuth()
@@ -141,7 +142,7 @@ class UserController extends AbstractActionController
         return $this->redirect()->toRoute($this->defaultRedirectRouteName);
     }
 
-    public function profileAction()
+    protected function getUser()
     {
     	$id = $this->id2Normal($this->params()->fromRoute('id'));
     	
@@ -150,6 +151,13 @@ class UserController extends AbstractActionController
     	
     	if(!$user)
     		throw new \Exception('User not found!');
+
+    	return $user;
+    }
+    
+    public function profileAction()
+    {
+		$user = $this->getUser();
     	
     	return new ViewModel([
            'user' => $user 
@@ -158,7 +166,15 @@ class UserController extends AbstractActionController
 
     public function profileEditAction()
     {
-    	return new ViewModel();
+       $user = $this->getUser();
+    	
+       if (!$this->isAllowed($user, 'edit')) {
+            throw new UnAuthorizedException();
+        }    	
+    	
+    	return new ViewModel([
+           'user' => $user 
+    	]);
     }
 
     public function adminOnlyAction()

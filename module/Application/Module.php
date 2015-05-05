@@ -16,10 +16,30 @@ use Zend\Console\Console;
 use Zend\Session\SaveHandler\MongoDBOptions;
 use Zend\Stdlib\ArrayUtils;
 use Zend\ModuleManager\Feature\ViewHelperProviderInterface;
+//use Zend\ModuleManager\Feature\InitProviderInterface;
+//use Zend\ModuleManager\ModuleManagerInterface;
+//use Zend\EventManager\EventInterface;
 
-class Module implements ViewHelperProviderInterface
+class Module implements ViewHelperProviderInterface /*InitProviderInterface*/
 {
-    public function onBootstrap(MvcEvent $e)
+    
+    /** {@inheritDoc} */
+//     public function init(ModuleManagerInterface $manager)
+//     {
+//         $manager->getEventManager()->getSharedManager()->attach(
+//             '*',
+//             '*',
+//             function (EventInterface $event) {
+//                 $target     = $event->getTarget();
+//                 $targetName = is_object($target) ? get_class($target) : gettype($target);
+
+//                 echo 'Triggered "' . $event->getName() . '" on "' . $targetName . "\"\n";
+//             },
+//             100000
+//         );
+//     }	
+	
+	public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $serviceManager      = $e->getApplication()->getServiceManager();

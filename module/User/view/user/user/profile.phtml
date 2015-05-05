@@ -6,11 +6,24 @@ $short = $this->id2Short($user->getId());
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
-			<?=$user->getId()?><br/>
-			(<?=$this->id2Normal($short)?>) 
-			<?=$user->getEmail()?>
+			<label>Id:</label><?=$user->getId()?><br/>
+			<label>ShortId:</label>(<?=$this->id2Normal($short)?>) 
+			<label>Email:</label><?=$user->getEmail()?>
+			<label>Status:</label>
+			<label>Username:</label>
+			<label>Dob:</label>
+			<label>Gender:</label>
 			</div>
 			<?=$this->partial('user/partials/sidebar/sidebar.phtml')?>			
 		</div>
+		
+		<?php if($this->isAllowed($user, 'edit')) :?>
+		<div class="row">
+			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
+			<li class="active"><a href="<?php echo $this->url('user/profile-edit',['id' => $short]) ?>"><?php echo $this->translate('Edit') ?></a></li>
+			</div>
+		</div>
+		<?php endif; ?>
+		
 	</div>
 </section>

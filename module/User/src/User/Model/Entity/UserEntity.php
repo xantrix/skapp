@@ -306,7 +306,10 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
         //return $this->roles->first();
     }*/
 
-    
+	public function getResourceId() {
+	     return 'User';
+	}    
+	
     /**
      * @param string $registrationToken
      * @return $this

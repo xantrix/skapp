@@ -65,6 +65,18 @@ return [
 		                    ],
 		                ],
 		            ],
+		            'profile-edit'        => [
+		                'type'    => 'Segment',
+		                'options' => [
+		                    'route'    => '/profile/:id/edit',
+                            'constraints' => [
+                                'id'     => '[a-zA-Z0-9_-]*'
+                            ],		                    
+		                    'defaults' => [
+		                        'action'     => 'profile-edit',
+		                    ],
+		                ],
+		            ],		            
 		            'logout'        => [
 		                'type'    => 'Zend\Mvc\Router\Http\Literal',
 		                'options' => [
