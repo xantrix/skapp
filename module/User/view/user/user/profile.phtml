@@ -13,7 +13,7 @@ $short = $this->id2Short($user->getId());
 			<label>Username:</label><?=$user->getUserName()?><br/>
 			<label>FirstName:</label><?=$user->getFirstName()?><br/>
 			<label>LastName:</label><?=$user->getLastName()?><br/>						
-			<label>Dob:</label><?=$user->getDob()->format(DateTime::ISO8601)?><br/>
+			<label>Dob:</label><?=($user->getDob())?$user->getDob()->format(DateTime::ISO8601):''?><br/>
 			<label>Gender:</label><?=$user->getGender()?><br/>
 			</div>
 		</div>

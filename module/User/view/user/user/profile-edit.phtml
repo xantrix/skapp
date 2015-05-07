@@ -1,5 +1,5 @@
 <?php
-use User\Form\FieldSet\UserFieldSet; 
+use User\Form\FieldSet\UserFieldSet;
 $editProfileForm = $this->editProfileForm;
 $editProfileForm->setAttribute('action', $this->url(null,array(),array(),true));
 $editProfileForm->setAttribute('autocomplete', 'off');
@@ -115,6 +115,15 @@ $this->formElementErrors()
                 </div>
                 <?= $this->formElementErrors($element); ?>                
                 
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("roles")) ; ?></label>
+                    <?php //Collection
+                        $element = $fieldSetRegistration->get('roles');
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                 
+                
                 <button type="submit" class="btn btn-border btn-profile-edit btn-block btn-lg">
                     <?= ucfirst($this->translate("SAVE")) ; ?>
                 </button>
@@ -124,3 +133,4 @@ $this->formElementErrors()
 		</div>
 	</div>
 </section>
+

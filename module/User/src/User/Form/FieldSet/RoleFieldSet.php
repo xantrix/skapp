@@ -19,7 +19,7 @@ class RoleFieldSet extends Fieldset
     public function addRoleId()
     {
         $elementText = new Element\Text('role_id');
-
+		$elementText->setAttribute('placeholder', 'roleid');
         $this->add($elementText);
         return $this;
     }    

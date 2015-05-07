@@ -61,7 +61,7 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_USERNAME)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_USERNAME);
-                $input->setRequired(true);
+                $input->setRequired(false);
             }
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_EMAIL)) {
