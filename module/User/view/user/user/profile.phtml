@@ -7,14 +7,15 @@ $short = $this->id2Short($user->getId());
 		<div class="row">
 			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
 			<label>Id:</label><?=$user->getId()?><br/>
-			<label>ShortId:</label>(<?=$this->id2Normal($short)?>) 
-			<label>Email:</label><?=$user->getEmail()?>
-			<label>Status:</label>
-			<label>Username:</label>
-			<label>Dob:</label>
-			<label>Gender:</label>
+			<label>ShortId:</label>(<?=$this->id2Normal($short)?>) <br/>
+			<label>Email:</label><?=$user->getEmail()?><br/>
+			<label>Status:</label><?=$user->getStatus()?><br/>
+			<label>Username:</label><?=$user->getUserName()?><br/>
+			<label>FirstName:</label><?=$user->getFirstName()?><br/>
+			<label>LastName:</label><?=$user->getLastName()?><br/>						
+			<label>Dob:</label><?=$user->getDob()->format(DateTime::ISO8601)?><br/>
+			<label>Gender:</label><?=$user->getGender()?><br/>
 			</div>
-			<?=$this->partial('user/partials/sidebar/sidebar.phtml')?>			
 		</div>
 		
 		<?php if($this->isAllowed($user, 'edit')) :?>

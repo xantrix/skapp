@@ -34,22 +34,25 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
+                        <li class=""><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
                         <?php if($this->identity()) :?>
-                        <?php 
-                        $sm = $this->getHelperPluginManager()->getServiceLocator();
-                        $user = $sm->get('AuthModule\AuthenticationService')->getIdentityObject(); ?>
-                        <li class="active"><a href="<?php echo $this->url('user-home') ?>"><?php echo $this->translate('User Home') ?></a></li>
-                        <li class="active"><a href="<?php echo $this->url('user/profile',['id' =>$this->id2Short($user->getId())]) ?>">
-                        	<?php echo $this->translate('Profile') ?></a>
-                        </li>
-                        <?php if($this->isAllowed('route/user/admin')) :?>
-                        <li class="active"><a href="<?php echo $this->url('user/admin') ?>"><?php echo $this->translate('AdminOnly') ?></a></li>
-                        <?php endif; ?>
-                        <li class="active"><a href="<?php echo $this->url('user/logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
+	                        <?php 
+	                        $sm = $this->getHelperPluginManager()->getServiceLocator();
+	                        $user = $sm->get('AuthModule\AuthenticationService')->getIdentityObject(); ?>
+	                        <li class=""><a href="<?php echo $this->url('user-home') ?>"><?php echo $this->translate('User Home') ?></a></li>
+	                        <li class=""><a href="<?php echo $this->url('user/profile',['id' =>$this->id2Short($user->getId())]) ?>">
+	                        	<?php echo $this->translate('Profile') ?></a>
+	                        </li>
+	                        
+	                        <?php if($this->isAllowed('route/user/admin')) :?>
+	                        <li class=""><a href="<?php echo $this->url('user/admin') ?>"><?php echo $this->translate('AdminOnly') ?></a></li>
+	                        <?php endif; ?>
+	                        <?=$this->partial('user/partials/navbar-dropdown-menu.phtml')?>
+	                        <li class=""><a href="<?php echo $this->url('user/logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                         <?php else :?>
-                        <li class="active"><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>
-                        <li class="active"><a href="<?php echo $this->url('registration') ?>"><?php echo $this->translate('Registration') ?></a></li>
+                        
+	                        <li class=""><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a></li>
+	                        <li class=""><a href="<?php echo $this->url('registration') ?>"><?php echo $this->translate('Registration') ?></a></li>
                         <?php endif; ?>
                     </ul>
                 </div><!--/.nav-collapse -->

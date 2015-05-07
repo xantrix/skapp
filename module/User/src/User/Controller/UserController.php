@@ -168,13 +168,39 @@ class UserController extends AbstractActionController
     {
        $user = $this->getUser();
     	
+       //check permission
        if (!$this->isAllowed($user, 'edit')) {
             throw new UnAuthorizedException();
         }    	
     	
+        $prg = $this->prg();
+        if ($prg instanceof Response) {
+            return $prg;
+        }
+        /* @var $editProfileForm \User\Form\EditProfileForm */
+    	$editProfileForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\EditProfileForm');        
+    	/* @var $user \User\Model\Entity\UserEntity */
+    	
+    	$editProfileForm->bind($user);
+
+    	if (is_array($prg)) {
+    		$prg['user-fieldset']['id'] = $user->getId();//form id value filled safely
+    	    $editProfileForm->setData($prg);
+    	    if ($editProfileForm->isValid()) {
+                $user->save();
+            
+                return $this->redirect()->toUrl($this->url()->fromRoute(
+            		$this->profileRouteName,['id' =>$this->id2Short($user->getId())]
+        		));
+    	    }
+    	    // else... show errors
+    	    //$editProfileForm->getMessages()
+    	}
+
     	return new ViewModel([
-           'user' => $user 
-    	]);
+           'editProfileForm' => $editProfileForm
+    	]);        
+
     }
 
     public function adminOnlyAction()

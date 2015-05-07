@@ -1,1 +1,126 @@
-profile-edit
+<?php
+use User\Form\FieldSet\UserFieldSet; 
+$editProfileForm = $this->editProfileForm;
+$editProfileForm->setAttribute('action', $this->url(null,array(),array(),true));
+$editProfileForm->setAttribute('autocomplete', 'off');
+$editProfileForm->prepare();
+$fieldSetRegistration = $editProfileForm->get(\User\Form\FieldSet\UserFieldSet::NAME);
+$validationGroup = $editProfileForm->getValidationGroup();
+
+$openTemplateError = '<div><div class="alert alert-danger" role="alert">';
+$closeTemplateError = '</div></div>';
+$this->formElementErrors()
+    ->setMessageOpenFormat($openTemplateError)
+    ->setMessageCloseString($closeTemplateError);
+?>
+<section id="profile-edit">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
+            	<div class="">
+                <h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("PROFILE_EDIT_TITLE")) ; ?></h1>
+                <?= $this->form()->openTag($editProfileForm); ?>			
+                <div class="form-group">
+                    <label><?= ucfirst($this->translate("userName")) ; ?></label>
+                	<?php // Render element
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_USERNAME);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("userName")),
+                                'data-ng-model' => UserFieldSet::INPUT_NAME_USERNAME,
+                                'data-ng-init' => UserFieldSet::INPUT_NAME_USERNAME . "='". $element->getValue() ."'",
+                                'data-skapp-filter-pattern' => '[0-9A-Za-z_]*',
+                                'data-skapp-filter-max-length' => 15,
+                                'data-skapp-filter-lowercase' => '',
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>
+                
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_EMAIL);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("email"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                
+                
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("firstName")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_FIRST_NAME);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("firstName"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                
+                
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("lastName")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_LAST_NAME);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("lastName"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                
+                
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("gender")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_GENDER);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("gender"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                
+                
+                <div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("dob")) ; ?></label>
+                    <?php
+                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_DOB);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("dob"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                </div>
+                <?= $this->formElementErrors($element); ?>                
+                
+                <button type="submit" class="btn btn-border btn-profile-edit btn-block btn-lg">
+                    <?= ucfirst($this->translate("SAVE")) ; ?>
+                </button>
+                <?= $this->form()->closeTag(); ?>                
+                
+			</div>
+		</div>
+	</div>
+</section>

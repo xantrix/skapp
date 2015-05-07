@@ -47,6 +47,16 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
     protected $userName;
 
     /**
+     * @var string
+     */
+    protected $firstName;    
+    
+    /**
+     * @var string
+     */
+    protected $lastName;      
+    
+    /**
      * @var RoleCollection
      */
     protected $roles;
@@ -87,6 +97,34 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	 */
 	protected $categories;
 	
+	/**
+	 * @return the $firstName
+	 */
+	public function getFirstName() {
+		return $this->firstName;
+	}
+
+	/**
+	 * @return the $lastName
+	 */
+	public function getLastName() {
+		return $this->lastName;
+	}
+
+	/**
+	 * @param string $firstName
+	 */
+	public function setFirstName($firstName) {
+		$this->firstName = $firstName;
+	}
+
+	/**
+	 * @param string $lastName
+	 */
+	public function setLastName($lastName) {
+		$this->lastName = $lastName;
+	}
+
 	public function __construct() { 
 		$this->categories = new ArrayObject();
 		$this->roles = new RoleCollection([ new RoleObject('user')]); 

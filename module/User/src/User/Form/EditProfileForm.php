@@ -34,12 +34,82 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
                 'type' => 'User\Form\FieldSet\UserFieldSet'
             ]
         );
-
-        // Add element
-        //$this->addInputPrivacy();
         
         //Set ValidationGroup
         //$this->initValidationGroup();
     }
+
+    public function getInputFilter()
+    {
+    	if(!$this->filter){
+    		$filter = parent::getInputFilter();
+    		$this->initInputFilter();
+    		return $filter;
+    	}else{
+    		return parent::getInputFilter();
+    	}
+    }    
+    
+    /**
+     * Set the inputFilter for this form
+     */
+    protected function initInputFilter()
+    {
+        $inputFilter = $this->getInputFilter();
+        if ($inputFilter->has(UserFieldSet::NAME)) {
+            $inputFilterFieldSet = $inputFilter->get(UserFieldSet::NAME);//get UserFieldSet
+
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_USERNAME)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_USERNAME);
+                $input->setRequired(true);
+            }
+
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_EMAIL)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_EMAIL);
+                $input->setRequired(true);
+                //add identity exists (email) validator: NoIdentityExistsFactory-> new NoIdentityExists, setCriteria,setModel, findIdentity
+                /* @var $noIdentityValidator \User\Model\Validator\NoIdentityExists */
+                $noIdentityValidator = $this->getServiceLocator()->getServiceLocator()->get('ValidatorManager')->get('User\Model\Validator\NoIdentityExists');
+                $noIdentityValidator->setExcludeField('id');
+                $input->getValidatorChain()->attach($noIdentityValidator);
+            }
+
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_GENDER)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_GENDER);
+                $input->setRequired(false);
+            }
         
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_LANGUAGE)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_LANGUAGE);
+                $input->setRequired(false);
+            }        
+            
+            /*if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD);
+                $input->setRequired(true);
+            }
+
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD_RE)) {
+                $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
+                $input->setRequired(true);
+                //add retype password validator
+                $input->getValidatorChain()->attach(new Identical(['token' => UserFieldSet::INPUT_NAME_PASSWORD]));
+            }*/
+        }
+
+    }    
+    
+    /**
+     * Set the validation group for this form
+     */
+    /*protected function initValidationGroup()
+    {
+    	$this->setValidationGroup([
+    			'user-fieldset' => [
+    				//'id'
+					'email',
+    			]
+    	]);
+    }*/    
+    
 }

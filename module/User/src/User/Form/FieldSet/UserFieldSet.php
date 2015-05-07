@@ -6,13 +6,14 @@ use Application\Form\FieldSet\CategoryFieldSet;
 use User\Model\Entity\UserEntity;
 use User\Model\Entity\UserInterface;
 use Zend\Form\Element;
-use Zend\Form\Fieldset;
+use Zend\Form\Fieldset; 
+use Zend\InputFilter\InputFilterProviderInterface;
 
 /**
  * Class UserFieldSet
  * @package User\Form\FieldSet
  */
-class UserFieldSet extends Fieldset
+class UserFieldSet extends Fieldset /*implements InputFilterProviderInterface*/
 {
     const NAME = 'user-fieldset';
 
@@ -242,4 +243,21 @@ class UserFieldSet extends Fieldset
 
         return $this;
     }
+    
+     /**
+      * NOTE: use only providing the full fields hierarchy or inputs won't be created
+      * @return array
+      */
+//      public function getInputFilterSpecification()
+//      {
+//          return array(
+//              'language' => array(
+//                  'required' => false,
+//              ),
+//              'gender' => array(
+//                  'required' => false,
+//              ), 
+//          );
+//      }    
+    
 }
