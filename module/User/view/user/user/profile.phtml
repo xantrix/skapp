@@ -4,6 +4,9 @@ $short = $this->id2Short($user->getId());
 ?>
 <section id="profile">
 	<div class="container">
+
+        <?php echo $this->partial('partials/flash-messages.phtml', []); ?>
+
 		<div class="row">
 			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
 			<label>Id:</label><?=$user->getId()?><br/>

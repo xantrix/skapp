@@ -1,6 +1,7 @@
 <?php
 namespace User\Controller;
 
+use Application\Utility\Message;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
@@ -188,6 +189,8 @@ class UserController extends AbstractActionController
     	    $editProfileForm->setData($prg);
     	    if ($editProfileForm->isValid()) {
                 $user->save();
+
+                $this->flashMessenger()->addSuccessMessage(Message::SUCCESS_GLOBAL);
             
                 return $this->redirect()->toUrl($this->url()->fromRoute(
             		$this->profileRouteName,['id' =>$this->id2Short($user->getId())]
