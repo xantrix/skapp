@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                         '<%= config.app %>/vendor/angular/angular.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
-                        '<%= config.app %>/js/app.js'
+                        '<%= config.app %>/js/**/*.js'
                             ],
                     dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
                 }
