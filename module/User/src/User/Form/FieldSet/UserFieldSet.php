@@ -176,7 +176,7 @@ class UserFieldSet extends Fieldset /*implements InputFilterProviderInterface*/
     public function addInputRoles()
     {
         $collectionRole = new Element\Collection('roles');
-        $collectionRole->setCount(2)
+        $collectionRole->setCount(1)
             ->setAllowAdd(true)
             ->setShouldCreateTemplate(true)
             ->setTargetElement(new RoleFieldSet());

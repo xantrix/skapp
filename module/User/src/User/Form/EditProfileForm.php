@@ -95,6 +95,20 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
                 //add retype password validator
                 $input->getValidatorChain()->attach(new Identical(['token' => UserFieldSet::INPUT_NAME_PASSWORD]));
             }*/
+            
+            /*if($inputFilterFieldSet->has('roles')){
+            	$roles = $inputFilterFieldSet->get('roles');//inputFilter 
+            	$roleFieldset = $this->get('user-fieldset')->get('roles')->getTargetElement();//collection->roleFieldset
+            	$collectionInputFilters = $roles->getInputs();//inputFilter (#elementsInCollection)
+            	foreach ($collectionInputFilters as $roleInputFilter) {
+            		//$roleInputs = $roleInputFilter->getInputs();
+            		//foreach ($roleInputs as $roleInput) {
+            			$roleInput->setRequired(true);
+            		//}
+            		$roleInput = $roleInputFilter->get('role_id');
+            		$roleInput->setRequired(true);
+            	}
+            }*/
         }
 
     }    

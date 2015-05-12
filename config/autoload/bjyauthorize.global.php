@@ -44,7 +44,7 @@ return [
             \BjyAuthorize\Provider\Role\Config::class => [
                 'guest' => ['children' =>[
 	                'user'  => ['children' => [
-	                	//b2b, others
+	                	'b2b','other',
 	                    'admin' => [],
 	                ]],	
             	]],

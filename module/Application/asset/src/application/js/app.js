@@ -1,10 +1,13 @@
 (function() {
     'use strict';
   
+    /* Register modules */
+    angular.module('application.shared',[]);
+    
     /* Register application */
     angular.module('application', [
 	    'ui.bootstrap',
-	    'application.common',
+	    'application.shared',
 	    'application.version'    
     ]);
 

@@ -14,8 +14,15 @@
           <li><i class="fa-li fa fa-square"></i>default bullets in lists</li>
         </ul>
     </div>
-    <div class="col-xs-12">
-    <div data-app-version></div>
+    <div class="col-xs-12"><!-- angular.element('[ng-controller=commonController]').scope() -->
+    <div ng-controller="CommonController">
+	    commonController:<span>{{user.name}}</span>
+	    <div ng-controller="TestController">
+	    	<div data-app-version></div>
+	    	testController:<span>{{user.name}}</span><br/>
+	    	<input ng-model="user.name" ng-change="change()"></input><!-- $scope inheritance test -->
+	    </div>
+    </div>
     </div>
     
 </div>

@@ -4,7 +4,7 @@ $editProfileForm = $this->editProfileForm;
 $editProfileForm->setAttribute('action', $this->url(null,array(),array(),true));
 $editProfileForm->setAttribute('autocomplete', 'off');
 $editProfileForm->prepare();
-$fieldSetRegistration = $editProfileForm->get(\User\Form\FieldSet\UserFieldSet::NAME);
+$fieldSetEdit = $editProfileForm->get(\User\Form\FieldSet\UserFieldSet::NAME);
 $validationGroup = $editProfileForm->getValidationGroup();
 
 $openTemplateError = '<div><div class="alert alert-danger" role="alert">';
@@ -23,7 +23,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label><?= ucfirst($this->translate("userName")) ; ?></label>
                 	<?php // Render element
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_USERNAME);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_USERNAME);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -43,7 +43,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("email")) ; ?></label>
                     <?php
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_EMAIL);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_EMAIL);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -58,7 +58,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("firstName")) ; ?></label>
                     <?php
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_FIRST_NAME);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_FIRST_NAME);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -73,7 +73,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("lastName")) ; ?></label>
                     <?php
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_LAST_NAME);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_LAST_NAME);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -88,7 +88,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("gender")) ; ?></label>
                     <?php
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_GENDER);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_GENDER);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -103,7 +103,7 @@ $this->formElementErrors()
                 <div class="form-group">
                     <label for=""><?= ucfirst($this->translate("dob")) ; ?></label>
                     <?php
-                        $element = $fieldSetRegistration->get(UserFieldSet::INPUT_NAME_DOB);
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_DOB);
                         $element->setAttributes(
                             [
                                 'class' => 'form-control',
@@ -115,14 +115,15 @@ $this->formElementErrors()
                 </div>
                 <?= $this->formElementErrors($element); ?>                
                 
-                <div class="form-group">
+                <div class="form-group" id="rolesCollection">
                     <label for=""><?= ucfirst($this->translate("roles")) ; ?></label>
                     <?php //Collection
-                        $element = $fieldSetRegistration->get('roles');
+                        $element = $fieldSetEdit->get('roles');
                         echo $this->formElement($element);
                     ?>
                 </div>
-                <?= $this->formElementErrors($element); ?>                 
+                <button data-add-item data-id="rolesCollection">Add a new role</button>
+                <button data-remove-item data-id="rolesCollection">Remove role</button>
                 
                 <button type="submit" class="btn btn-border btn-profile-edit btn-block btn-lg">
                     <?= ucfirst($this->translate("SAVE")) ; ?>
@@ -133,4 +134,3 @@ $this->formElementErrors()
 		</div>
 	</div>
 </section>
-
