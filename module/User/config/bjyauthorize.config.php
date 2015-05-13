@@ -11,6 +11,7 @@ return [
                 'allow' => [
                     [['user'], 'User', 'edit', 'assertion.CheckMyProfile'], //edit their own profile only
                     [['admin'], 'User', 'edit'], //edit all profiles
+                    [['admin'], 'User', 'edit-roles'],
                 ],
                 'deny' => [
                     // ...

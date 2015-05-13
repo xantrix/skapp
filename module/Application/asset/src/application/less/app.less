@@ -7,3 +7,14 @@ body {
     background-color:#e9eaed;
     color: #222;
 }
+
+/* Temporary workaround to switching to Font Awesome
+https://github.com/angular-ui/bootstrap/issues/2475 
+*/
+.glyphicon {
+  .fa-icon();
+}
+.glyphicon-chevron-left:before { content: @fa-var-chevron-left; }
+.glyphicon-chevron-right:before { content: @fa-var-chevron-right; }
+.glyphicon-chevron-up:before { content: @fa-var-chevron-up; }
+.glyphicon-chevron-down:before { content: @fa-var-chevron-down; }

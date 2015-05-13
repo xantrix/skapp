@@ -143,6 +143,10 @@ class UserController extends AbstractActionController
         return $this->redirect()->toRoute($this->defaultRedirectRouteName);
     }
 
+    /**
+     * @throws \Exception
+     * @return \User\Model\Entity\UserEntity
+     */
     protected function getUser()
     {
     	$id = $this->id2Normal($this->params()->fromRoute('id'));
@@ -180,7 +184,9 @@ class UserController extends AbstractActionController
         }
         /* @var $editProfileForm \User\Form\EditProfileForm */
     	$editProfileForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\EditProfileForm');        
-    	/* @var $user \User\Model\Entity\UserEntity */
+        if ($this->isAllowed($user, 'edit-roles')) {
+            $editProfileForm->addRolesValidation();
+        }     	
     	
     	$editProfileForm->bind($user);
 
@@ -201,6 +207,7 @@ class UserController extends AbstractActionController
     	}
 
     	return new ViewModel([
+		   'user' => $user,
            'editProfileForm' => $editProfileForm
     	]);        
 

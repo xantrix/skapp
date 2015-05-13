@@ -36,7 +36,7 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
         );
         
         //Set ValidationGroup
-        //$this->initValidationGroup();
+        $this->initValidationGroup();
     }
 
     public function getInputFilter()
@@ -116,14 +116,29 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
     /**
      * Set the validation group for this form
      */
-    /*protected function initValidationGroup()
+    protected function initValidationGroup()
     {
     	$this->setValidationGroup([
     			'user-fieldset' => [
-    				//'id'
+    				'id',
+    				'user_name',
 					'email',
+    				'first_name',
+    				'last_name',
+    				'gender',
+    				'dob',
+    				//'roles'
     			]
     	]);
-    }*/    
+    }    
+    
+    public function addRolesValidation()
+    {
+    	$validationGroup = $this->getValidationGroup();
+    	if($validationGroup){
+    		$validationGroup['user-fieldset'][] = 'roles';
+    		$this->setValidationGroup($validationGroup);
+    	}
+    }
     
 }
