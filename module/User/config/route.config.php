@@ -76,7 +76,19 @@ return [
 		                        'action'     => 'profile-edit',
 		                    ],
 		                ],
-		            ],		            
+		            ],
+		            'profile-remove'  => [
+		                'type'    => 'Segment',
+		                'options' => [
+		                    'route'    => '/profile/:id/remove',
+                            'constraints' => [
+                                'id'     => '[a-zA-Z0-9_-]*'
+                            ],		                    
+		                    'defaults' => [
+		                        'action'     => 'profile-remove',
+		                    ],
+		                ],
+		            ],		            		            
 		            'logout'        => [
 		                'type'    => 'Zend\Mvc\Router\Http\Literal',
 		                'options' => [

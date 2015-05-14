@@ -1,4 +1,6 @@
 <?php
+/* @var $user \User\Model\Entity\UserEntity */ 
+$short = $this->id2Short($user->getId());
 use User\Form\FieldSet\UserFieldSet;
 $editProfileForm = $this->editProfileForm;
 $editProfileForm->setAttribute('action', $this->url(null,array(),array(),true));
@@ -16,10 +18,18 @@ $this->formElementErrors()
 <section id="profile-edit">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-10 col-sm-6 col-md-5 col-lg-4">
-            	<div class="">
-                <h1 class="heading"><i class="pe-7s-id"></i> <?= ucfirst($this->translate("PROFILE_EDIT_TITLE")) ; ?></h1>
-                <?= $this->form()->openTag($editProfileForm); ?>			
+			<div class="col-xs-12 col-sm-4 col-md-3 inPage leftMenu">
+			    <div class="list-group">
+			    		<a class="list-group-item active" href="<?php echo $this->url('user/profile-edit',['id' => $short]) ?>"><?php echo $this->translate('Edit') ?></a>
+			            <a class="list-group-item" href="<?php echo $this->url('user/profile-remove',['id' => $short]) ?>"><?php echo $this->translate('Remove') ?></a>
+			    </div>
+			</div>		
+		
+			<div class="col-xs-12 col-sm-8 col-md-5 inPage">
+            	<div class="" ></div>
+                <?= $this->form()->openTag($editProfileForm); ?>
+                <accordion close-others="false">
+                <accordion-group heading="<?= ucfirst($this->translate("PROFILE_EDIT_BASIC")) ; ?>" is-open="true" >			
                 <div class="form-group">
                     <label><?= ucfirst($this->translate("userName")) ; ?></label>
                 	<?php // Render element
@@ -122,20 +132,26 @@ $this->formElementErrors()
                 	</div>
                 </div>
                 <?= $this->formElementErrors($element); ?>                
+                </accordion-group>
                 
                 <?php if($this->isAllowed($user, 'edit-roles')) :?>
-                <div class="form-group" id="rolesCollection">
-                    <label for=""><?= ucfirst($this->translate("roles")) ; ?></label>
-                    <?php //Collection
-                        $element = $fieldSetEdit->get('roles');
-                        echo $this->formElement($element);
-                    ?>
-                </div>
-                <div>
-                	<button data-add-item data-id="rolesCollection">Add a new role</button>
-                	<button data-remove-item data-id="rolesCollection">Remove role</button>
-                </div>
+	                <accordion-group heading="<?= ucfirst($this->translate("PROFILE_EDIT_ROLES")) ; ?>" is-open="false">
+	                <div class="form-group" id="rolesCollection">
+	                    <label for=""><?= ucfirst($this->translate("roles")) ; ?></label>
+	                    <?php //Collection
+	                        $element = $fieldSetEdit->get('roles');
+	                        echo $this->formElement($element);
+	                    ?>
+	                </div>
+	                <div>
+	                	<button data-add-item data-id="rolesCollection">Add a new role</button>
+	                	<button data-remove-item data-id="rolesCollection">Remove role</button>
+	                </div>
+	                
+	                </accordion-group>
                 <?php endif; ?>
+                
+                </accordion>
                 
                 <button type="submit" class="btn btn-border btn-profile-edit btn-block btn-lg">
                     <?= ucfirst($this->translate("SAVE")) ; ?>
@@ -144,5 +160,5 @@ $this->formElementErrors()
                 
 			</div>
 		</div>
-	</div>
+	</div><!-- /container -->
 </section>

@@ -58,13 +58,43 @@
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
-        <div class="container">
-            <?php echo $this->content; ?>
-            <hr>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>
-        </div> <!-- /container -->
+        <div class="nav-padding"></div>
+        <main id="wrapper">
+	        <div class="container mainContainer">
+	            <?php echo $this->content; ?>
+	        </div> <!-- /container -->
+        </main>
+        <div class="footer-container">
+	        <footer id="footer" class="container">
+		        <div class="row">
+					<section class="footer-block col-xs-12 col-sm-3" ng-controller="CollapseController">
+						<h4 ng-click="isCollapsed = !isCollapsed">Block1</h4>
+						<ul collapse="isCollapsed">
+							<li class="first_item"><a href="#" title="Link1">Link1</a></li>
+							<li class="item"><a href="#" title="Link1">Link1</a></li>
+						</ul>
+					</section>
+					<section class="footer-block col-xs-12 col-sm-3" ng-controller="CollapseController">
+						<h4 ng-click="isCollapsed = !isCollapsed">Block2</h4>
+						<ul collapse="isCollapsed">
+							<li class="first_item"><a href="#" title="Link1">Link1</a></li>
+						</ul>					
+					</section>
+					<section class="footer-block col-xs-12 col-sm-3" ng-controller="CollapseController">
+						<h4 ng-click="isCollapsed = !isCollapsed">Block3</h4>
+						<ul collapse="isCollapsed">
+							<li class="first_item"><a href="#" title="Link1">Link1</a></li>
+						</ul>					
+					</section>
+					<section class="footer-block col-xs-12 col-sm-3" ng-controller="CollapseController">
+						<h4 ng-click="isCollapsed = !isCollapsed">Block4</h4>
+						<ul collapse="isCollapsed">
+							<li class="first_item"><a href="#" title="Link1">Link1</a></li>
+						</ul>					
+					</section>												        
+		        </div>
+	        </footer>
+        </div>        
         <?php echo $this->hangerSnippet() ?>
         <?php echo $this->inlineScript()->prependFile($this->basePath('/_/asset/application/js/application.js')); ?>
     </body>

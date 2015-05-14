@@ -213,6 +213,11 @@ class UserController extends AbstractActionController
 
     }
 
+    public function profileRemoveAction()
+    {
+    	return new ViewModel();
+    }
+    
     public function adminOnlyAction()
     {
     	return new ViewModel();

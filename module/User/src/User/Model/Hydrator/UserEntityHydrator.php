@@ -24,7 +24,7 @@ class UserEntityHydrator extends ClassMethods
         // Convert DateTime to a formated string and viceversa
         $this->addStrategy('date_created', new DateTimeStrategy());
         $this->addStrategy('date_modified', new DateTimeStrategy());
-        $this->addStrategy('dob', new DateTimeStrategy());
+        $this->addStrategy('dob', new DateTimeStrategy('d-m-Y'));
 
         // Remove hidden field from output
         $this->filterComposite->addFilter('passwordCrypt', new MethodMatchFilter('getPasswordCrypt'), FilterComposite::CONDITION_AND);

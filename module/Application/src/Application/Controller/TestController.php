@@ -200,5 +200,14 @@ class TestController extends AbstractActionController {
         	'items' => $items,	
         	'registrationForm' => $registrationForm,
         ]);
-    }	
+    }
+
+    public function offcanvasAction()
+    {
+	    $viewModel = new ViewModel();
+	    //$viewModel->setVariables(array('key' => 'value'))->setTerminal(true);
+	
+	    return $viewModel;
+    }
+    
 }
