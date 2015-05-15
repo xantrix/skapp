@@ -127,7 +127,8 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 
 	public function __construct() { 
 		$this->categories = new ArrayObject();
-		$this->roles = new RoleCollection([ new RoleObject('user')]); 
+		$this->roles = new RoleCollection([ new RoleObject('user')]);
+		$this->status = UserInterface::STATUS_INACTIVE; 
 	}
 	/**
 	 * @return the $dob

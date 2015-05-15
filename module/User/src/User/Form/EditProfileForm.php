@@ -5,6 +5,7 @@ use User\Form\FieldSet\UserFieldSet;
 use Zend\Form\Form;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\Validator\Identical;
 
 class EditProfileForm extends Form implements ServiceLocatorAwareInterface
 {
@@ -84,17 +85,17 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
                 $input->setRequired(false);
             }        
             
-            /*if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD)) {
+            if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD);
-                $input->setRequired(true);
+                $input->setRequired(false);
             }
 
             if ($inputFilterFieldSet->has(UserFieldSet::INPUT_NAME_PASSWORD_RE)) {
                 $input = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
-                $input->setRequired(true);
+                $input->setRequired(false);
                 //add retype password validator
                 $input->getValidatorChain()->attach(new Identical(['token' => UserFieldSet::INPUT_NAME_PASSWORD]));
-            }*/
+            }
             
             /*if($inputFilterFieldSet->has('roles')){
             	$roles = $inputFilterFieldSet->get('roles');//inputFilter 
@@ -127,10 +128,32 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
     				'last_name',
     				'gender',
     				'dob',
-    				//'roles'
+    				'password',
+    				'password_re',
     			]
     	]);
     }    
+    
+    public function setData($data)
+    {
+    	$form = parent::setData($data);
+    	
+    	$inputFilter = $this->getInputFilter();
+    	if ($inputFilter->has(UserFieldSet::NAME)){
+    		$inputFilterFieldSet = $inputFilter->get(UserFieldSet::NAME);
+    		//$passwordInput = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD);
+    		/* @var $passwordElement \Zend\Form\Element */
+    		$passwordElement = $this->get(UserFieldSet::NAME)->get(UserFieldSet::INPUT_NAME_PASSWORD);
+    		
+    		//if password is filled, retype is required
+    		if($passwordElement->getValue()){ 
+    			$passwordReInput = $inputFilterFieldSet->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
+    			$passwordReInput->setRequired(true);
+    		}
+    	}
+    	
+    	return $form;
+    }
     
     public function addRolesValidation()
     {
@@ -140,5 +163,14 @@ class EditProfileForm extends Form implements ServiceLocatorAwareInterface
     		$this->setValidationGroup($validationGroup);
     	}
     }
+    
+    public function addStatusValidation()
+    {
+    	$validationGroup = $this->getValidationGroup();
+    	if($validationGroup){
+    		$validationGroup['user-fieldset'][] = 'status';
+    		$this->setValidationGroup($validationGroup);
+    	}
+    }    
     
 }

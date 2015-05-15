@@ -5,6 +5,8 @@ use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Matryoshka\Model\ModelEvent;
 use User\Model\Entity\UserEntity;
+use User\Model\Entity\UserInterface;
+use Application\Model\UniqueToken;
 
 class RegistrationListener extends AbstractListenerAggregate
 {
@@ -22,7 +24,11 @@ class RegistrationListener extends AbstractListenerAggregate
         $user = $e->getData();
 
         if ($user instanceof UserEntity) {
-            //TODO: generate registration token
+            if($user->getStatus() === UserInterface::STATUS_INACTIVE){
+	        	$registrationToken = UniqueToken::getToken();
+	            $user->setRegistrationToken($registrationToken);
+	            $user->setStatus(UserInterface::STATUS_ACTIVE);
+            }
         }
 
     }

@@ -135,7 +135,7 @@ $this->formElementErrors()
                 </accordion-group>
                 
                 <?php if($this->isAllowed($user, 'edit-roles')) :?>
-	                <accordion-group heading="<?= ucfirst($this->translate("PROFILE_EDIT_ROLES")) ; ?>" is-open="false">
+	                <accordion-group heading="<?= ucfirst($this->translate("PROFILE_EDIT_ROLES_STATUS")) ; ?>" is-open="false">
 	                <div class="form-group" id="rolesCollection">
 	                    <label for=""><?= ucfirst($this->translate("roles")) ; ?></label>
 	                    <?php //Collection
@@ -143,13 +143,60 @@ $this->formElementErrors()
 	                        echo $this->formElement($element);
 	                    ?>
 	                </div>
+	                <br/>
 	                <div>
 	                	<button data-add-item data-id="rolesCollection">Add a new role</button>
 	                	<button data-remove-item data-id="rolesCollection">Remove role</button>
-	                </div>
+	                </div>		                
+	                <br/>
+	                
+	                <div class="form-group" id="status">
+	                    <label for=""><?= ucfirst($this->translate("Status")) ; ?></label>
+	                    <?php 
+	                        $element = $fieldSetEdit->get('status');
+	                        echo $this->formElement($element);
+	                    ?>
+	                </div>	                
 	                
 	                </accordion-group>
                 <?php endif; ?>
+                
+                <?php 
+                $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
+                $groupIsOpen = (empty($element->getMessages())) ? false : true;  
+                ?>
+                <accordion-group heading="<?= ucfirst($this->translate("PROFILE_EDIT_PASSWORD")) ; ?>" is-open="<?=$groupIsOpen?>">
+	                <div class="form-group">
+                    <label><?= ucfirst($this->translate("password")) ; ?></label>
+                	<?php
+                        $element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_PASSWORD);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("password"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+	                </div>
+	                <?= $this->formElementErrors($element); ?>
+	                
+                	<div class="form-group">
+                    <label for=""><?= ucfirst($this->translate("repeat password")) ; ?></label>
+                    <?php
+                    	$element = $fieldSetEdit->get(UserFieldSet::INPUT_NAME_PASSWORD_RE);
+                        $element->setAttributes(
+                            [
+                                'class' => 'form-control',
+                                'placeholder' => ucfirst($this->translate("repeat password"))
+                            ]
+                        );
+                        echo $this->formElement($element);
+                    ?>
+                	</div>
+                <?= $this->formElementErrors($element); ?>	                                
+                </accordion-group>
+                
                 
                 </accordion>
                 

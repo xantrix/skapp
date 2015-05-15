@@ -186,6 +186,7 @@ class UserController extends AbstractActionController
     	$editProfileForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\EditProfileForm');        
         if ($this->isAllowed($user, 'edit-roles')) {
             $editProfileForm->addRolesValidation();
+            $editProfileForm->addStatusValidation();
         }     	
     	
     	$editProfileForm->bind($user);

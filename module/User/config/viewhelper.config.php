@@ -4,6 +4,6 @@ return [
 
     ],
     'invokables' => [
-
+		'formatUserStatus' => 'User\View\Helper\FormatUserStatus'
     ]
 ];

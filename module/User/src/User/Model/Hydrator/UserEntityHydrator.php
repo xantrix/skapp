@@ -3,6 +3,7 @@ namespace User\Model\Hydrator;
 
 use Matryoshka\Model\Hydrator\ClassMethods;
 use Matryoshka\Model\Hydrator\Strategy\DateTimeStrategy;
+use Matryoshka\Model\Hydrator\Strategy\SetTypeStrategy;
 use Zend\Stdlib\Hydrator\Filter\MethodMatchFilter;
 use Zend\Stdlib\Hydrator\Filter\FilterComposite;
 
@@ -25,6 +26,7 @@ class UserEntityHydrator extends ClassMethods
         $this->addStrategy('date_created', new DateTimeStrategy());
         $this->addStrategy('date_modified', new DateTimeStrategy());
         $this->addStrategy('dob', new DateTimeStrategy('d-m-Y'));
+        $this->addStrategy('status', new SetTypeStrategy('int','int'));
 
         // Remove hidden field from output
         $this->filterComposite->addFilter('passwordCrypt', new MethodMatchFilter('getPasswordCrypt'), FilterComposite::CONDITION_AND);

@@ -30,6 +30,7 @@ class UserFieldSet extends Fieldset /*implements InputFilterProviderInterface*/
     const INPUT_NAME_CATEGORIES   = 'categories';
     const INPUT_NAME_LANGUAGE      = 'language';
     const INPUT_NAME_MOBILE_PHONE_NUMBER  = 'mobile_phone_number';
+    const INPUT_NAME_STATUS      = 'status';
 
     /**
      * Construct
@@ -56,6 +57,7 @@ class UserFieldSet extends Fieldset /*implements InputFilterProviderInterface*/
             ->addInputEmail()
             ->addInputAddress() //AddressFieldSet
             ->addInputRoles() //RoleFieldset
+            ->addInputStatus()
             ->addInputLanguage()
         ;
     }
@@ -243,6 +245,22 @@ class UserFieldSet extends Fieldset /*implements InputFilterProviderInterface*/
 
         return $this;
     }
+    
+    public function addInputStatus()
+    {
+        $element = new Element\Select(self::INPUT_NAME_STATUS);
+        $element->setValueOptions(
+            [
+                UserInterface::STATUS_INACTIVE => UserInterface::STATUS_LABEL_INACTIVE,
+                UserInterface::STATUS_ACTIVE => UserInterface::STATUS_LABEL_ACTIVE,
+        		UserInterface::STATUS_BLOCKED => UserInterface::STATUS_LABEL_BLOCKED,
+        		UserInterface::STATUS_REMOVED => UserInterface::STATUS_LABEL_REMOVED
+            ]
+        );
+        $this->add($element);
+
+        return $this;
+    }    
     
      /**
       * NOTE: use only providing the full fields hierarchy or inputs won't be created

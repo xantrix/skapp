@@ -22,6 +22,16 @@ interface UserInterface extends IdentityAwareInterface, /*RoleInterface,*/ RoleP
 	const GENDER_WOMAN = 'female';
     
     const BCRYPT_COST = 10;
+    
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_BLOCKED = 2;
+    const STATUS_REMOVED = 4;
+    
+    const STATUS_LABEL_INACTIVE = 'USER_INACTIVE';
+    const STATUS_LABEL_ACTIVE = 'USER_ACTIVE';
+    const STATUS_LABEL_BLOCKED = 'USER_BLOCKED';
+    const STATUS_LABEL_REMOVED = 'USER_REMOVED';
 
     /**
      * @param string $email
