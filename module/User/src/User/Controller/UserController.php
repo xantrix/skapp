@@ -8,6 +8,10 @@ use Zend\Http\Response;
 use User\Model\Entity\UserEntity;
 use Zend\Mvc\MvcEvent;
 use BjyAuthorize\Exception\UnAuthorizedException;
+use Zend\View\Model\JsonModel;
+use Zend\Json\Json;
+use User\Model\Criteria\UserCollectionCriteria;
+use Application\Model\Traits\PaginatorTrait;
 
 /**
  * @method \AuthModule\Controller\Plugin\InteractiveAuth interactiveAuth()
@@ -15,6 +19,8 @@ use BjyAuthorize\Exception\UnAuthorizedException;
  */
 class UserController extends AbstractActionController
 {
+	use PaginatorTrait;
+	
     /**
      * @var string
      */
@@ -34,7 +40,7 @@ class UserController extends AbstractActionController
 	
 	public function indexAction()
 	{
-		return true;
+		return new ViewModel();
 	}
 
     //unauthenticated actions
@@ -224,5 +230,56 @@ class UserController extends AbstractActionController
     	return new ViewModel();
     }
 
+    public function listAction()
+    {
+    	$format = $this->params()->fromRoute('format');
+    	if($format == 'json'){
+    		return $this->listJson();
+    	}
+    	
+    	return new ViewModel();
+    }
+    
+    public function listJson()
+    {
+	    $order = array();
+	    $criteria = array();
+		$page = (int) $this->params()->fromQuery('page',0);
+		$length = (int) $this->params()->fromQuery('length',2);
+		
+		$search = Json::decode($this->params()->fromQuery('search'));
+		$sort = Json::decode($this->params()->fromQuery('sort'));		
+		
+		$result["page"] = $page;
+		$result["length"] = $length; 
+    	
+    	if(!empty($search->predicateObject->startDate)){
+			$criteria['start'] = $search->predicateObject->startDate;
+			$criteria['end']   = $search->predicateObject->endDate;
+		}
+		if(!empty($search->predicateObject->location))
+			$criteria['location'] = $search->predicateObject->location;
+		if(!empty($search->predicateObject->description))
+			$criteria['description'] = $search->predicateObject->description;
+		
+		if(!empty((array) $sort)){
+			$order['order_by'] = $sort->predicate;
+			$order['order'] = $sort->reverse ? 'DESC' : 'ASC';
+		}    	
+		
+    	$paginatorAdapter = $this->userModel->getPaginatorAdapter(
+    			/*(new UserCollectionCriteria())*/
+		);
+    	$paginator = $this->getPaginatorFromAdapter($paginatorAdapter);		
+		$paginator->setDefaultItemCountPerPage($length);
+		$paginator->setCurrentPageNumber($page);		
+    	
+		//return new JsonModel($result);
+		$this->getResponse()->getHeaders()->addHeaderLine( 'Content-Type', 'application/json');
+		$viewModel = new ViewModel(['result' => $result, 'paginator' => $paginator]);
+		$viewModel->setTerminal(true);
+		$viewModel->setTemplate('user/list-json');
+		return $viewModel;    	
+    }
+    
 }
-

@@ -53,7 +53,16 @@ class RoleCollection extends ArrayObject implements RoleCollectionInterface {
             }
         }
     }
-    	
+
+    public function toArray()
+    {
+    	$result = [];
+    	foreach ($this as $key => $value) {
+    		$result[] = $value->toArray();
+    	}
+    	return $result;
+    }
+    
 }
 
 ?>

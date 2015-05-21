@@ -7,6 +7,8 @@
     /* Register application */
     angular.module('application', [
 	    'ui.bootstrap',
+	    'smart-table',
+	    'ngResource',
 	    'application.shared',
 	    'application.version'    
     ]);

@@ -50,3 +50,4 @@ http://bower.io/docs/config/   [.bowerrc ]
 https://github.com/bower/bower.json-spec [bower.json]
 bower list #List local packages - and possible updates 
 bower update
+bower install angular-smart-table -S #install and save into bower.json

@@ -1,0 +1,30 @@
+<?php 
+$result = $this->result; //save as local var
+
+$result["recordsTotal"] = $this->paginator->getTotalItemCount();
+$result["pagesTotal"] = ceil($this->paginator->getTotalItemCount() / $result["length"] );
+$result['data'] = [];//init
+
+if($result["recordsTotal"] > 0){
+	/* @var $user \User\Model\Entity\UserEntity */
+	foreach ($this->paginator->getCurrentItems() as $key => $user)
+	{
+		
+		$short = $this->id2Short($user->getId());			
+		$result['data'][] = 
+		[
+			'id' => $short,
+			'email' => $user->getEmail(),
+			'username' => $user->getUserName(),
+			'first_name' => $user->getFirstName(),
+			'last_name' => $user->getLastName(),
+			'status' => $this->translate($this->formatUserStatus($user->getStatus())),
+			'dob' => ($user->getDob())?$user->getDob()->format(DateTime::ISO8601):'',
+			'gender' => $user->getGender(),
+			'roles' => $user->getRoles()->toArray()
+		];
+	}			
+}
+$this->result = $result; //set as view var
+?>
+<?= $this->json($this->result) ?>

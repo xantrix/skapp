@@ -47,7 +47,11 @@
 	                        <?php if($this->isAllowed('route/user/admin')) :?>
 	                        <li class=""><a href="<?php echo $this->url('user/admin') ?>"><?php echo $this->translate('AdminOnly') ?></a></li>
 	                        <?php endif; ?>
-	                        <?=$this->partial('user/partials/navbar-dropdown-menu.phtml')?>
+	                        
+	                        <?php if($this->isAllowed('route/user/admin')) :?>
+	                        	<?=$this->partial('user/partials/navbar-dropdown-menu.phtml',['user'=>$user])?>
+	                        <?php endif; ?>
+	                        
 	                        <li class=""><a href="<?php echo $this->url('user/logout') ?>"><?php echo $this->translate('Logout') ?></a></li>
                         <?php else :?>
                         

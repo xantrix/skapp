@@ -27,8 +27,10 @@ module.exports = function (grunt) {
                         '<%= config.app %>/vendor/jquery/dist/jquery.js',
                         '<%= config.app %>/vendor/bootstrap/dist/js/bootstrap.js',
                         '<%= config.app %>/vendor/angular/angular.js',
+                        '<%= config.app %>/vendor/angular-resource/angular-resource.min.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap.js',
                         '<%= config.app %>/vendor/angular-bootstrap/ui-bootstrap-tpls.js',
+                        '<%= config.app %>/vendor/angular-smart-table/dist/smart-table.min.js',
                         '<%= config.app %>/js/**/*.js'
                             ],
                     dest: '<%= config.dist %>/js/<%= pkg.name %>.js'

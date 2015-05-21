@@ -1,0 +1,37 @@
+<div ng-controller="StController" data-url="/user/list.json">
+<table class="table" st-pipe="callServer" st-table="displayed">
+	<thead>
+		<tr>
+			<th st-sort="id"><?=$this->translate('id')?></th>
+			<th st-sort="username"><?=$this->translate('username')?></th>
+			<th st-sort="email"><?=$this->translate('email')?></th>
+			<th st-sort="status"><?=$this->translate('status')?></th>
+		</tr>
+		<tr>
+			<th><input st-search="id"/></th>
+			<th><input st-search="username"/></th>
+			<th><input st-search="email"/></th>
+			<th><input st-search="status"/></th>
+		</tr>
+	</thead>
+	<tbody ng-show="!isLoading">
+		<tr ng-repeat="row in displayed">
+			<td>{{row.id}}</td>
+			<td>{{row.username}}</td>
+			<td>{{row.email}}</td>
+			<td>{{row.status}}</td>
+		</tr>
+	</tbody>
+	<tbody ng-show="isLoading">
+		<tr>
+			<td colspan="4" class="text-center">Loading ... </td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td class="text-center" st-pagination="" st-items-by-page="2" colspan="4">
+			</td>
+		</tr>
+	</tfoot>
+</table>
+</div>

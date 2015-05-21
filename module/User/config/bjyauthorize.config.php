@@ -29,10 +29,12 @@ return [
                 ['route' => 'user/recover-password', 'roles' => ['guest']],
                 ['route' => 'user/profile', 'roles' => ['guest']],
                 //User
+                ['route' => 'user-home', 'roles' => ['user']],
                 ['route' => 'user/logout', 'roles' => ['user']],
                 ['route' => 'user/profile-edit', 'roles' => ['user']], // + rule_providers assertion
                 //Admin
                 ['route' => 'user/admin', 'roles' => ['admin']],
+                ['route' => 'user/list', 'roles' => ['admin']],
             ],	
 		]        	
 	]

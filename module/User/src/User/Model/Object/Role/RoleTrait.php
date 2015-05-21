@@ -26,4 +26,10 @@ trait RoleTrait {
 		$this->roleId = $roleId;
 	}
 	
+ 	public function toArray(){
+        return [
+			'role_id' => $this->getRoleId()
+        ];
+     }	
+	
 }

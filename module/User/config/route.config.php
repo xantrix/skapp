@@ -88,7 +88,19 @@ return [
 		                        'action'     => 'profile-remove',
 		                    ],
 		                ],
-		            ],		            		            
+		            ],
+		            'list'  => [
+		                'type'    => 'Segment',
+		                'options' => [
+		                    'route'    => '/list[.:format]',
+                            'constraints' => [
+                                'format'     => 'json'
+                            ],		                    
+		                    'defaults' => [
+		                        'action'     => 'list',
+		                    ],
+		                ],
+		            ],
 		            'logout'        => [
 		                'type'    => 'Zend\Mvc\Router\Http\Literal',
 		                'options' => [

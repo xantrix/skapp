@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ZendSkeletonApplication\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 19:26+0100\n"
-"PO-Revision-Date: 2015-03-18 19:26+0100\n"
+"POT-Creation-Date: 2015-05-20 10:42+0100\n"
+"PO-Revision-Date: 2015-05-20 10:43+0100\n"
 "Last-Translator: \n"
 "Language-Team: ZF Contibutors <zf-devteam@zend.com>\n"
 "Language: en_US\n"
@@ -30,19 +30,34 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: ../view/layout/layout.phtml:38
-#: ../../Application/view/layout/layout.phtml:38
+#: ../view/layout/layout.phtml:42
+#: ../../Application/view/layout/layout.phtml:42
 msgid "User Home"
 msgstr ""
 
-#: ../view/layout/layout.phtml:39
-#: ../../Application/view/layout/layout.phtml:39
-msgid "Login"
+#: ../view/layout/layout.phtml:44
+#: ../../Application/view/layout/layout.phtml:44
+msgid "Profile"
 msgstr ""
 
 #: ../view/layout/layout.phtml:48
 #: ../../Application/view/layout/layout.phtml:48
-msgid "All rights reserved."
+msgid "AdminOnly"
+msgstr ""
+
+#: ../view/layout/layout.phtml:55
+#: ../../Application/view/layout/layout.phtml:55
+msgid "Logout"
+msgstr ""
+
+#: ../view/layout/layout.phtml:58
+#: ../../Application/view/layout/layout.phtml:58
+msgid "Login"
+msgstr ""
+
+#: ../view/layout/layout.phtml:59
+#: ../../Application/view/layout/layout.phtml:59
+msgid "Registration"
 msgstr ""
 
 #: ../view/error/index.phtml:1 ../../Application/view/error/index.phtml:1
@@ -128,68 +143,132 @@ msgstr ""
 msgid "resolves to %s"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:26
-#: ../../User/view/user/user/login.phtml:20
-msgid "Skapptest"
+#: ../../User/view/user/user/thank-you.phtml:1
+msgid "Thanks for signing up"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:35
-msgid "REGISTRATION_TITLE"
-msgstr "Sign up"
-
-#: ../../User/view/user/user/registration.phtml:38
-msgid "USER_FORM_NAME_USERNAME_TOOLTIP"
+#: ../../User/view/user/user/profile.phtml:27
+#: ../../User/view/user/user/profile-edit.phtml:23
+msgid "Edit"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:38
-#: ../../User/view/user/user/registration.phtml:44
+#: ../../User/view/user/user/profile-edit.phtml:24
+msgid "Remove"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:32
+msgid "PROFILE_EDIT_BASIC"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:34
+#: ../../User/view/user/user/profile-edit.phtml:40
+#: ../../User/view/user/user/registration.phtml:41
+#: ../../User/view/user/user/registration.phtml:47
 msgid "userName"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:57
-#: ../../User/view/user/user/registration.phtml:63
+#: ../../User/view/user/user/profile-edit.phtml:54
+#: ../../User/view/user/user/profile-edit.phtml:60
+#: ../../User/view/user/user/registration.phtml:62
+#: ../../User/view/user/user/registration.phtml:68
 #: ../../User/view/user/user/login.phtml:32
 #: ../../User/view/user/user/login.phtml:39
 msgid "email"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:71
-msgid "USER_FORM_NAME_PASSWORD_TOOLTIP"
+#: ../../User/view/user/user/profile-edit.phtml:69
+#: ../../User/view/user/user/profile-edit.phtml:75
+msgid "firstName"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:71
-#: ../../User/view/user/user/registration.phtml:77
+#: ../../User/view/user/user/profile-edit.phtml:84
+#: ../../User/view/user/user/profile-edit.phtml:90
+msgid "lastName"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:99
+#: ../../User/view/user/user/profile-edit.phtml:105
+msgid "gender"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:114
+msgid "dob"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:138
+msgid "PROFILE_EDIT_ROLES_STATUS"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:140
+msgid "roles"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:154
+msgid "Status"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:168
+msgid "PROFILE_EDIT_PASSWORD"
+msgstr ""
+
+#: ../../User/view/user/user/profile-edit.phtml:170
+#: ../../User/view/user/user/profile-edit.phtml:176
+#: ../../User/view/user/user/registration.phtml:76
+#: ../../User/view/user/user/registration.phtml:82
 #: ../../User/view/user/user/login.phtml:47
 #: ../../User/view/user/user/login.phtml:54
 msgid "password"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:85
-#: ../../User/view/user/user/registration.phtml:91
+#: ../../User/view/user/user/profile-edit.phtml:185
+#: ../../User/view/user/user/profile-edit.phtml:191
+#: ../../User/view/user/user/registration.phtml:90
+#: ../../User/view/user/user/registration.phtml:96
 msgid "repeat password"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:109
+#: ../../User/view/user/user/profile-edit.phtml:204
+msgid "SAVE"
+msgstr ""
+
+#: ../../User/view/user/user/registration.phtml:27
+#: ../../User/view/user/user/login.phtml:20
+msgid "Skapptest"
+msgstr ""
+
+#: ../../User/view/user/user/registration.phtml:36
+msgid "REGISTRATION_TITLE"
+msgstr "Sign up"
+
+#: ../../User/view/user/user/registration.phtml:41
+msgid "USER_FORM_NAME_USERNAME_TOOLTIP"
+msgstr ""
+
+#: ../../User/view/user/user/registration.phtml:76
+msgid "USER_FORM_NAME_PASSWORD_TOOLTIP"
+msgstr ""
+
+#: ../../User/view/user/user/registration.phtml:114
 msgid "I have read and understand"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:110
+#: ../../User/view/user/user/registration.phtml:115
 msgid "Terms and legal notes"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:111
+#: ../../User/view/user/user/registration.phtml:116
 msgid "and"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:112
+#: ../../User/view/user/user/registration.phtml:117
 msgid "Privacy Policy"
 msgstr ""
 
-#: ../../User/view/user/user/registration.phtml:117
+#: ../../User/view/user/user/registration.phtml:122
 msgid "REGISTRATION_BUTTON"
 msgstr "Sign up"
 
-#: ../../User/view/user/user/registration.phtml:120
+#: ../../User/view/user/user/registration.phtml:125
 msgid "already registered?"
 msgstr ""
 
