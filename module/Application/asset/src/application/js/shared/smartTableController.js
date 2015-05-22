@@ -19,8 +19,9 @@ angular.module('application.shared')
 	    
 	      //call resource factory
 		  service.getPage($attrs.url, page, length, search, sort, tableState).then(function (result) {
+			  result = result.data;
 			  $scope.displayed = result.data;
-			  tableState.pagination.numberOfPages = result.numberOfPages;//set the number of pages from server
+			  tableState.pagination.numberOfPages = result.pagesTotal;//set the number of pages from server
 			  $scope.isLoading = false;
 		  });
 	  };

@@ -236,31 +236,45 @@ class UserController extends AbstractActionController
     	if($format == 'json'){
     		return $this->listJson();
     	}
+        /* @var $searchForm \User\Form\SearchForm */
+    	$searchForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\SearchForm');    	
     	
-    	return new ViewModel();
+    	
+    	return new ViewModel([
+			'searchForm' => $searchForm                	
+    	]);
     }
     
     public function listJson()
     {
 	    $order = array();
-	    $criteria = array();
 		$page = (int) $this->params()->fromQuery('page',0);
 		$length = (int) $this->params()->fromQuery('length',2);
+		$sort = $this->params()->fromQuery('sort');
+		$get = $this->params()->fromQuery();
 		
-		$search = Json::decode($this->params()->fromQuery('search'));
-		$sort = Json::decode($this->params()->fromQuery('sort'));		
+// 		$sort = Json::decode($this->params()->fromQuery('sort'));		
 		
 		$result["page"] = $page;
 		$result["length"] = $length; 
     	
-    	if(!empty($search->predicateObject->startDate)){
-			$criteria['start'] = $search->predicateObject->startDate;
-			$criteria['end']   = $search->predicateObject->endDate;
-		}
-		if(!empty($search->predicateObject->location))
-			$criteria['location'] = $search->predicateObject->location;
-		if(!empty($search->predicateObject->description))
-			$criteria['description'] = $search->predicateObject->description;
+		$criteria = new UserCollectionCriteria();
+		
+        /* @var $searchForm \User\Form\SearchForm */
+    	$searchForm = $this->serviceLocator->get('FormElementManager')->get('User\Form\SearchForm');
+
+    	$searchForm->setData($get);
+    	//validate search fields
+    	if($searchForm->isValid()){
+    		$data = $searchForm->getData();
+    		
+			if($data['user-fieldset']['email'] != null)
+				$criteria->setEmail($data['user-fieldset']['email'],true);
+
+			if( $data['user-fieldset']['status'] != null && $data['user-fieldset']['status'] != '-')
+				$criteria->setStatus($data['user-fieldset']['status']);				
+    	}
+    	//$searchForm->getMessages()
 		
 		if(!empty((array) $sort)){
 			$order['order_by'] = $sort->predicate;
@@ -268,7 +282,7 @@ class UserController extends AbstractActionController
 		}    	
 		
     	$paginatorAdapter = $this->userModel->getPaginatorAdapter(
-    			/*(new UserCollectionCriteria())*/
+    			$criteria
 		);
     	$paginator = $this->getPaginatorFromAdapter($paginatorAdapter);		
 		$paginator->setDefaultItemCountPerPage($length);

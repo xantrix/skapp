@@ -21,7 +21,7 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
     protected $id;
 
     /**
-     * @var string
+     * @var int
      */
      protected $status;
 
@@ -194,7 +194,7 @@ class UserEntity extends AbstractEntity implements UserInterface, AuthObjectInte
 	}
 
 	/**
-	 * @param string $status
+	 * @param int $status
 	 */
 	public function setStatus($status) {
 		$this->status = $status;

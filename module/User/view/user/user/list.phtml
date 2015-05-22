@@ -1,3 +1,8 @@
+<?php 
+use User\Form\FieldSet\UserFieldSet;
+$searchForm->prepare();
+$userFieldSet = $searchForm->get(UserFieldSet::NAME);
+?>
 <div ng-controller="StController" data-url="/user/list.json">
 <table class="table" st-pipe="callServer" st-table="displayed">
 	<thead>
@@ -8,10 +13,20 @@
 			<th st-sort="status"><?=$this->translate('status')?></th>
 		</tr>
 		<tr>
-			<th><input st-search="id"/></th>
-			<th><input st-search="username"/></th>
-			<th><input st-search="email"/></th>
-			<th><input st-search="status"/></th>
+			<th><input st-search="user-fieldset[id]"/></th>
+			<th><input st-search="user-fieldset[username]"/></th>
+			<th><input st-search="user-fieldset[email]"/></th>
+			<th>
+	                    <?php 
+	                        $element = $userFieldSet->get('status');
+	                        $element->setAttributes(
+	                            [
+	                                'data-st-search' => 'user-fieldset[status]',
+	                            ]
+	                        );	                        
+	                        echo $this->formElement($element);
+	                    ?>			
+			</th>
 		</tr>
 	</thead>
 	<tbody ng-show="!isLoading">

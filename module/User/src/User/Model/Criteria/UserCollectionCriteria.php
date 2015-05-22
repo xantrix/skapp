@@ -5,6 +5,7 @@ use Matryoshka\Model\Wrapper\Mongo\Criteria\FindAllCriteria;
 use DateTime;
 use MongoDate;
 use MongoId;
+use MongoRegex;
 
 class UserCollectionCriteria extends FindAllCriteria
 {
@@ -29,9 +30,12 @@ class UserCollectionCriteria extends FindAllCriteria
      * @param string $email
      * @return $this
      */
-    public function setEmail($email)
+    public function setEmail($email, $partialMatch = false)
     {
-        $this->selectionCriteria['email'] = (string) $email;
+        if(!$partialMatch)
+    		$this->selectionCriteria['email'] = (string) $email;
+        else
+        	$this->selectionCriteria['email'] = new MongoRegex("/$email/i");
         return $this;
     }
     
@@ -92,7 +96,7 @@ class UserCollectionCriteria extends FindAllCriteria
      */    
     public function setStatus($status)
     {
-        $this->selectionCriteria['state'] = (string) $status;
+        $this->selectionCriteria['status'] = (int) $status;
         return $this;
     }
 
